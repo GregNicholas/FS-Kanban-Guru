@@ -4,14 +4,15 @@
   "description": "kanban guru with a mongodb backend",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node backend/server.ts",
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
+    "client": "npm run dev --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Greg Schoenberg",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

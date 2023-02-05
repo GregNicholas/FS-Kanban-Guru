@@ -22,35 +22,35 @@ const createBoard = asyncHandler(async (req, res) => {
         throw new Error('Please add board data')
     }
 
-    // const board = await Board.create({
-    //     user: req.user.id,
-    //     name: req.body.name,
-    //     columns: req.body.columns
-    //     tasks: req.body.tasks 
-    // })
-
     const board = await Board.create({
         user: req.user.id,
-        name: "Gman's third(for real) board",
-        columns: ["Column Yi", "Column er"],
-        tasks: [
-            {
-                title: "first task here",
-                description: "task description",
-                subtasks: [
-                    {
-                        title: "round it out",
-                    },
-                    {
-                        title: "go for it",
-                    }
-                ]
-            },
-            {
-                title: "second task on the board"
-            }
-        ]
+        name: req.body.name,
+        columns: req.body.columns || [],
+        tasks: req.body.tasks || []
     })
+
+    // const board = await Board.create({
+    //     user: req.user.id,
+    //     name: "Gman's third(for real) board",
+    //     columns: ["Column Yi", "Column er"],
+    //     tasks: [
+    //         {
+    //             title: "first task here",
+    //             description: "task description",
+    //             subtasks: [
+    //                 {
+    //                     title: "round it out",
+    //                 },
+    //                 {
+    //                     title: "go for it",
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             title: "second task on the board"
+    //         }
+    //     ]
+    // })
     res.status(200).json({ message: 'create board'})
 })
 

@@ -11,31 +11,30 @@ const boardSchema = mongoose.Schema({
         required: true
     },
     columns: {
+        type: [String],
+        required: false
+    },
+    tasks: {
         type: [
             {
-                name: String,
-                tasks: {
+                title: String,
+                description: String,
+                status: String,
+                subtasks: {
                     type: [
                         {
                             title: String,
-                            description: String,
-                            status: String,
-                            subtasks: {
-                                type: [
-                                    {
-                                        title: String,
-                                        isCompleted: Boolean
-                                    }
-                                ],
-                                required: false
-                            }
+                            isCompleted: {
+                                type: Boolean,
+                                default: false
+                            },
                         }
                     ],
-                    required: false
+                    default: []
                 }
             }
         ],
-        required: false
+        default: []
     }
 },
 {
@@ -44,3 +43,46 @@ const boardSchema = mongoose.Schema({
 )
 
 module.exports = mongoose.model("Board", boardSchema)
+
+// const boardSchema = mongoose.Schema({
+//     user: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         required: true,
+//         ref: 'User'
+//     },
+//     name: {
+//         type: String,
+//         required: true
+//     },
+//     columns: {
+//         type: [
+//             {
+//                 name: String,
+//                 tasks: {
+//                     type: [
+//                         {
+//                             title: String,
+//                             description: String,
+//                             status: String,
+//                             subtasks: {
+//                                 type: [
+//                                     {
+//                                         title: String,
+//                                         isCompleted: Boolean
+//                                     }
+//                                 ],
+//                                 required: false
+//                             }
+//                         }
+//                     ],
+//                     required: false
+//                 }
+//             }
+//         ],
+//         required: false
+//     }
+// },
+// {
+//     timestamps: true
+// }
+// )

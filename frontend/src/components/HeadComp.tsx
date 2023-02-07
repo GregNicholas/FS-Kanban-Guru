@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const HeadComp = () => {
   return (
-    <header>
+    <header className="w-48 h-screen bg-l-gray">
         <p>
             <Link to='/'>Dashboard</Link>
         </p>

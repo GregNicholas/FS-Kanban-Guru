@@ -1,22 +1,14 @@
 import { useState } from "react"
 import { useLocation } from 'react-router-dom'
-import Login from "../components/Auth/Login"
-import Register from "../components/Auth/Register"
-import Button from "../components/Button"
+import Login from "../../pages/Login"
+import Register from "./Register"
+import Button from "../Button"
 
-const Authentication = () => {
-    const location = useLocation()
-    const { action } = location.state
-    const [formDisplay, setFormDisplay] = useState(action || "login")
-  
-  console.log("location state action? ", action, formDisplay)
-  const matchPasswords = () => {
-      console.log("placeholder for matchPasswords")
-  }
-  const validatePassword = () => {
-    console.log("placeholder for validatePassword")
+type AuthenticationProps = {
+    children: JSX.Element
   }
 
+const Authentication = ({children}: AuthenticationProps) => {
   return (
     <>
     <section className="flex max-w-4xl max-h-full m-auto bg-main-purple">
@@ -34,14 +26,14 @@ const Authentication = () => {
         <section className="relative flex-[2_1_0%] text-main-purple bg-l-gray">
             <div className="px-10 pt-12 pb-8 font-bold text-base leading-snug">
             <p>
-                Sign up to access all the benefits of your very own kanban boards!
+                Access all the benefits of your very own kanban boards!
                 Kanban Guru will turn all of your projects into manageable tasks.
             </p>
-            <p>Sign up <span className="italic">now</span>&nbsp; to get started.</p>
-            <p className="mt-5">You <span className="italic">know</span>&nbsp; you want to.</p>
+            <p className="mt-5">Let's get started <span className="italic">now</span>.</p>
+            {/* <p className="mt-5">You <span className="italic">know</span>&nbsp; you want to.</p> */}
             </div>
             <div className="w-full bg-white h-64 pt-4 pr-10 pb-7 pl-10">
-                {action === "register" ? <Register matchPasswords={matchPasswords} validatePassword={validatePassword} /> : <Login matchPasswords={matchPasswords} validatePassword={validatePassword}/>}
+                {children}
             </div>
             <div id="message" className="hidden">
                 <h3>Password must contain the following:</h3>

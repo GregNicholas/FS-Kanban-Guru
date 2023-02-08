@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
+import authReducer from '../features/auth/authSlice'
 // import boardsReducer from "../features/boardsSlice"
 // import displayBoardReducer from "../features/displayBoardSlice"
 
 export const store = configureStore({
     reducer: {
-        // boards: boardsReducer,
-        // board: displayBoardReducer
+        auth: authReducer,
     }
 })
 

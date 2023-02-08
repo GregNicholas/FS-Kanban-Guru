@@ -2,6 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost/5000",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,10 +12,12 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@types/node": "^18.11.18",
+    "axios": "^1.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.8.0"
+    "react-router-dom": "^6.8.0",
+    "react-toastify": "^9.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

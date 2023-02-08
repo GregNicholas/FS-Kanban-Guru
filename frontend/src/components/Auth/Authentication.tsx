@@ -1,9 +1,3 @@
-import { useState } from "react"
-import { useLocation } from 'react-router-dom'
-import Login from "../../pages/Login"
-import Register from "./Register"
-import Button from "../Button"
-
 type AuthenticationProps = {
     children: JSX.Element
   }
@@ -15,7 +9,6 @@ const Authentication = ({children}: AuthenticationProps) => {
         <section className="flex-[1_1.1_0%] relative bg-cover z-10 text-main-purple bg-[url('/assets/woods_background.jpg')]">
             <div className="absolute top-1/4 flex justify-center items-center text-4xl font-bold text-shadow shadow-white gap-1 w-full h-32 bg-white/[.6]">
             <img className="drop-shadow-lg" src="../assets/logo-dark.svg" />
-            {/* <h1 className="hero-title-name">K Guru</h1> */}
             </div>
             <p className="credit absolute bottom-0 text-xs text-white text-center w-full">
             Photo by
@@ -30,7 +23,6 @@ const Authentication = ({children}: AuthenticationProps) => {
                 Kanban Guru will turn all of your projects into manageable tasks.
             </p>
             <p className="mt-5">Let's get started <span className="italic">now</span>.</p>
-            {/* <p className="mt-5">You <span className="italic">know</span>&nbsp; you want to.</p> */}
             </div>
             <div className="w-full bg-white h-64 pt-4 pr-10 pb-7 pl-10">
                 {children}

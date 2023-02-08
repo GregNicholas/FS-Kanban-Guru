@@ -8,12 +8,12 @@ const HeadComp = () => {
         </p>
         <ul>
             <li>
-                <Link to='/login' state={{ action: "login" }}>
+                <Link to='/login'>
                     Login
                 </Link>
             </li>
             <li>
-                <Link to='/register' state={{ action: "register" }}>
+                <Link to='/register'>
                     Register
                 </Link>
             </li>

@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import Button from "../Button"
 
 const LoginForm = () => {
@@ -10,8 +11,16 @@ const LoginForm = () => {
 
   const {name, email, password} = formData
 
-  const onChange = () => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+        ...prev,
+        [e.target.name]: e.target.value
+    }))
+  }
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      console.log("submit", e)
   }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
@@ -19,13 +28,14 @@ const LoginForm = () => {
 
   return (
     <>
-    <form>
+    <form onSubmit={onSubmit}>
       <h2 className="text-2xl font-bold mb-4">Login!</h2>
       <div className="flex flex-wrap gap-x-10 gap-y-4 max-w-[40rem] inline-block">
         <div className='form-group'>
             <label className={labelStyle} htmlFor="email">email</label>
             <input
             type='email'
+            name='email'
             className={inputStyle}
             id='email'
             value={email}
@@ -37,6 +47,7 @@ const LoginForm = () => {
             <label className={labelStyle} htmlFor="password">password</label>
             <input
             type='password'
+            name='password'
             className={inputStyle}
             id='password'
             value={password}
@@ -47,10 +58,12 @@ const LoginForm = () => {
       </div>
     </form>
     <div className="w-60 mt-4 mx-auto">
-      <Button text="Create Account" onClick={() => console.log("login click")} primary={true} />
+      <Button type="submit" text="Create Account" primary={true} />
     </div>
         <p className="text-main-purple mt-4 text-sm">
-            Already have an account? <a className="underline" href="#">Login</a>
+            Need an account? <Link className="underline" to='/register'>
+                Register
+            </Link>
         </p>
     </>
   )

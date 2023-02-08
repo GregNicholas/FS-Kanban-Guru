@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import Button from "../Button"
 
 const RegisterForm = () => {
@@ -11,9 +12,17 @@ const RegisterForm = () => {
 
   const {name, email, password, confirmPass} = formData
 
-  const onChange = () => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
 
-  }
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log("submit", e)
+    }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
   const inputStyle = "w-50 h-7 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
@@ -27,6 +36,7 @@ const RegisterForm = () => {
         <label className={labelStyle} htmlFor="name">name</label>
         <input
           type='text'
+          name='name'
           className={inputStyle}
           id='name'
           value={name}
@@ -38,6 +48,7 @@ const RegisterForm = () => {
         <label className={labelStyle} htmlFor="email">email</label>
         <input
           type='email'
+          name='email'
           className={inputStyle}
           id='email'
           value={email}
@@ -49,6 +60,7 @@ const RegisterForm = () => {
         <label className={labelStyle} htmlFor="password">password</label>
         <input
           type='password'
+          name='password'
           className={inputStyle}
           id='password'
           value={password}
@@ -60,6 +72,7 @@ const RegisterForm = () => {
         <label className={labelStyle} htmlFor="confirmPass">confirm password</label>
         <input
           type='password'
+          name='confirmPass'
           className={inputStyle}
           id='confirmPass'
           value={confirmPass}
@@ -73,7 +86,9 @@ const RegisterForm = () => {
       <Button text="Create Account" onClick={() => console.log("register clicked")} primary={true} />
     </div>
         <p className="text-main-purple mt-4 text-sm">
-            Already have an account? <a className="underline" href="#">Login</a>
+            Already have an account? <Link className="underline" to='/login'>
+                Login
+            </Link>
         </p>
     </>
   )

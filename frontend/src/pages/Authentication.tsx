@@ -41,59 +41,8 @@ const Authentication = () => {
             <p className="mt-5">You <span className="italic">know</span>&nbsp; you want to.</p>
             </div>
             <div className="w-full bg-white h-64 pt-4 pr-10 pb-7 pl-10">
-                {action === "register" ? <Register /> : <Login />}
+                {action === "register" ? <Register matchPasswords={matchPasswords} validatePassword={validatePassword} /> : <Login matchPasswords={matchPasswords} validatePassword={validatePassword}/>}
             </div>
-            {/* <form action="#" id="form-register">
-            <h2 className="form-title">Let's do this!</h2>
-            <div className="inputs-all">
-                <div className="input-block">
-                <label htmlFor="first-name">first name</label>
-                <input type="text" name="firstName" id="first-name" required />
-                </div>
-                <div className="input-block">
-                <label htmlFor="last-name">last name</label>
-                <input type="text" name="lastName" id="last-name" required />
-                </div>
-                <div className="input-block">
-                <label htmlFor="email">email</label>
-                <input type="email" name="email" id="email" required />
-                </div>
-                <div className="input-block">
-                <label htmlFor="phone">phone number</label>
-                <input
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    pattern="^[(]?\d{3}[)]?[\s,\-]?\d{3}-?\d{4}$"
-                    required
-                />
-                </div>
-                <div className="input-block">
-                <label htmlFor="password">password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    minLength={8}
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                    onkeyup="validatePassword()"
-                    required
-                />
-                </div>
-                <div className="input-block">
-                <label htmlFor="password-confirm">confirm password</label>
-                <input
-                    type="password"
-                    name="passwordConfirm"
-                    id="password-confirm"
-                    minLength={8}
-                    onkeyup="matchPasswords()"
-                    required
-                />
-                </div>
-            </div>
-            </form> */}
             <div id="message" className="hidden">
                 <h3>Password must contain the following:</h3>
                 <p id="letter" className="invalid">A <b>lowercase</b> letter</p>
@@ -104,10 +53,6 @@ const Authentication = () => {
                 <p id="length" className="invalid">Minimum <b>8 characters</b></p>
                 <p id="match" className="invalid">Passwords must match</p>
             </div>
-            <Button text="Create Account" onClick={matchPasswords} primary={true} />
-            <p className="text-main-purple mt-0 pl-10 text-sm">
-                Already have an account? <a className="underline" href="#">Login</a>
-            </p>
         </section>
     </section>
     </>

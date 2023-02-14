@@ -4,6 +4,8 @@ import Authentication from './components/Auth/Authentication';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import HeadComp from './components/HeadComp';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 }

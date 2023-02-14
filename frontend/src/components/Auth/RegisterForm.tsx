@@ -1,6 +1,11 @@
 import {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-toastify'
 import { Link } from 'react-router-dom'
-import Button from "../Button"
+import Button from '../Button'
+import Loader from '../../components/Loader'
+import {register, reset} from '../../features/auth/authSlice'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +17,25 @@ const RegisterForm = () => {
 
   const {name, email, password, confirmPass} = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {user, isLoading, isError, isSuccess, message} = useSelector(
+      (state: any) => state.auth)
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(message)
+    }
+
+    if(isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+  
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({
             ...prev,
@@ -21,15 +45,30 @@ const RegisterForm = () => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log("submit", e)
+        
+        if(password !== confirmPass){
+            toast.error('Passwords do not match')
+        } else {
+            const userData = {
+                name,
+                email,
+                password
+            }
+            console.log("submit: ", userData)
+            dispatch(register(userData) as any)
+        }
     }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
   const inputStyle = "w-50 h-7 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
 
+  if(isLoading) {
+    return <Loader />
+  }
+
   return (
     <>
-    <form>
+    <form onSubmit={onSubmit}>
       <h2 className="text-2xl font-bold mb-4">Create an account!</h2>
       <div className="flex flex-wrap gap-x-10 gap-y-4 max-w-[40rem] inline-block">
       <div className='form-group'>
@@ -42,6 +81,7 @@ const RegisterForm = () => {
           value={name}
           placeholder='Enter your name'
           onChange={onChange}
+          required
         />
       </div>
       <div className='form-group'>
@@ -54,6 +94,7 @@ const RegisterForm = () => {
           value={email}
           placeholder='Enter your email'
           onChange={onChange}
+          required
         />
       </div>
       <div className='form-group'>
@@ -66,6 +107,7 @@ const RegisterForm = () => {
           value={password}
           placeholder='Enter your password'
           onChange={onChange}
+          required
         />
       </div>
       <div className='form-group'>
@@ -78,13 +120,15 @@ const RegisterForm = () => {
           value={confirmPass}
           placeholder='Confirm password'
           onChange={onChange}
+          required
         />
       </div>
       </div>
+      <div className="w-60 mt-4 mx-auto">
+        <Button type="submit" text="Create Account" onClick={() => console.log("register clicked")} primary={true} />
+      </div>
     </form>
-    <div className="w-60 mt-4 mx-auto">
-      <Button text="Create Account" onClick={() => console.log("register clicked")} primary={true} />
-    </div>
+    
         <p className="text-main-purple mt-4 text-sm">
             Already have an account? <Link className="underline" to='/login'>
                 Login

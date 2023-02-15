@@ -1,7 +1,12 @@
 import axios from 'axios'
 
-interface UserData {
+interface RegisterData {
     name: string,
+    email: string,
+    password: string
+}
+
+interface LoginData {
     email: string,
     password: string
 }
@@ -13,7 +18,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'development'
 const API_URL = `${API_BASE_URL}/api/users`
 
 // Register user
-const register = async (userData: UserData) => {
+const register = async (userData: RegisterData) => {
     try {
         const response = await axios.post(API_URL, userData)
         localStorage.setItem('user', JSON.stringify(response.data))
@@ -25,7 +30,7 @@ const register = async (userData: UserData) => {
 }
 
 // Login user
-const login = async (userData: UserData) => {
+const login = async (userData: LoginData) => {
     try {
         const response = await axios.post(`${API_URL}/login`, userData)
         localStorage.setItem('user', JSON.stringify(response.data))

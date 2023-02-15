@@ -1,6 +1,11 @@
 import {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Button from "../Button"
+import Loader from '../../components/Loader'
+import {login, reset} from '../../features/auth/authSlice'
+import {toast} from 'react-toastify'
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +16,24 @@ const LoginForm = () => {
 
   const {name, email, password} = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {user, isLoading, isError, isSuccess, message} = useSelector(
+    (state: any) => state.auth)
+
+  useEffect(() => {
+    if(isError) {
+      toast.error(message)
+    }
+
+    if(isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
         ...prev,
@@ -20,12 +43,20 @@ const LoginForm = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      console.log("submit", e)
+
+      const userData = {
+          email,
+          password
+      }
+      console.log("submit: ", userData)
+      dispatch(login(userData) as any)
   }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
   const inputStyle = "w-50 h-7 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
 
+  if(isLoading) return <Loader />
+  
   return (
     <>
     <form onSubmit={onSubmit}>
@@ -56,10 +87,11 @@ const LoginForm = () => {
             />
         </div>
       </div>
+      <div className="w-60 mt-4 mx-auto">
+        <Button type="submit" text="Login" primary={true} />
+      </div>
     </form>
-    <div className="w-60 mt-4 mx-auto">
-      <Button type="submit" text="Create Account" primary={true} />
-    </div>
+    
         <p className="text-main-purple mt-4 text-sm">
             Need an account? <Link className="underline" to='/register'>
                 Register

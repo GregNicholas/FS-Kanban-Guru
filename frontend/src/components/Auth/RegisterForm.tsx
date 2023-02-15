@@ -54,7 +54,6 @@ const RegisterForm = () => {
                 email,
                 password
             }
-            console.log("submit: ", userData)
             dispatch(register(userData) as any)
         }
     }
@@ -125,7 +124,7 @@ const RegisterForm = () => {
       </div>
       </div>
       <div className="w-60 mt-4 mx-auto">
-        <Button type="submit" text="Create Account" onClick={() => console.log("register clicked")} primary={true} />
+        <Button type="submit" text="Create Account" primary={true} />
       </div>
     </form>
     

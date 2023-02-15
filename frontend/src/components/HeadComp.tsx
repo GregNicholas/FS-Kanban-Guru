@@ -1,6 +1,11 @@
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import {logout} from '../features/auth/authSlice'
 
 const HeadComp = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   return (
     <header className="w-48 h-screen bg-l-gray">
         <p>
@@ -15,6 +20,11 @@ const HeadComp = () => {
             <li>
                 <Link to='/register'>
                     Register
+                </Link>
+            </li>
+            <li>
+                <Link to='/login' onClick={() => dispatch(logout())}>
+                    Logout
                 </Link>
             </li>
         </ul>

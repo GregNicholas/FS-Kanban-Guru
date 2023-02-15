@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { AppDispatch } from '../app/store'
 import {logout} from '../features/auth/authSlice'
 
 const HeadComp = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   return (
     <header className="w-48 h-screen bg-l-gray">

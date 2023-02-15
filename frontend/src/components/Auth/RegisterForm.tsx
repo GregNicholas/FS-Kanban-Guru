@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Button from '../Button'
 import Loader from '../../components/Loader'
 import {register, reset} from '../../features/auth/authSlice'
+import { AppDispatch } from '../../app/store'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const RegisterForm = () => {
   const {name, email, password, confirmPass} = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const {user, isLoading, isError, isSuccess, message} = useSelector(
       (state: any) => state.auth)
@@ -54,7 +55,7 @@ const RegisterForm = () => {
                 email,
                 password
             }
-            dispatch(register(userData) as any)
+            dispatch(register(userData))
         }
     }
 

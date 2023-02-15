@@ -6,6 +6,7 @@ import Button from "../Button"
 import Loader from '../../components/Loader'
 import {login, reset} from '../../features/auth/authSlice'
 import {toast} from 'react-toastify'
+import { AppDispatch } from '../../app/store'
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const LoginForm = () => {
   const {name, email, password} = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const {user, isLoading, isError, isSuccess, message} = useSelector(
     (state: any) => state.auth)
@@ -49,14 +50,14 @@ const LoginForm = () => {
           password
       }
       console.log("submit: ", userData)
-      dispatch(login(userData) as any)
+      dispatch(login(userData))
   }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
   const inputStyle = "w-50 h-7 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
 
   if(isLoading) return <Loader />
-  
+
   return (
     <>
     <form onSubmit={onSubmit}>

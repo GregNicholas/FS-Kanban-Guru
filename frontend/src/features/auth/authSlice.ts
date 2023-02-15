@@ -2,9 +2,9 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import authService from './authService'
 
 interface UserData {
-    name: String,
-    email: String,
-    password: String
+    name: string,
+    email: string,
+    password: string
 }
 
 // Get user from local storage

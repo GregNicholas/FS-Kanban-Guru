@@ -1,45 +1,39 @@
 import axios from 'axios'
 
 interface UserData {
-    name: String,
-    email: String,
-    password: String
+    name: string,
+    email: string,
+    password: string
 }
 
-if(process.env.NODE_ENV === 'development'){
-    axios.defaults.baseURL = `http://localhost:3080`
-}
+const API_BASE_URL = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3080'
+    : 'https://your-production-api-url.com'
 
-const API_URL = '/api/users/'
+const API_URL = `${API_BASE_URL}/api/users`
 
 // Register user
 const register = async (userData: UserData) => {
-    console.log("in register authservice ")
-    let response: any
-    try{
-        response = await axios.post(API_URL, userData)
-    } catch (err:any){
-        console.log("Register error : ", err)
-    }
-    
-    console.log("RESP", response)
-    if(response.data) {
+    try {
+        const response = await axios.post(API_URL, userData)
         localStorage.setItem('user', JSON.stringify(response.data))
+        return response.data
+    } catch (err) {
+        console.error('Register error:', err)
+        throw new Error('Failed to register user')
     }
-
-    return response.data
 }
 
 // Login user
 const login = async (userData: UserData) => {
-    console.log("in login authService")
-    const response = await axios.post(API_URL + 'login', userData)
-
-    if(response.data) {
+    try {
+        const response = await axios.post(`${API_URL}/login`, userData)
         localStorage.setItem('user', JSON.stringify(response.data))
+        return response.data
+    } catch (err) {
+        console.error('Login error:', err)
+        throw new Error('Failed to login')
     }
-
-    return response.data
 }
 
 // Logout user

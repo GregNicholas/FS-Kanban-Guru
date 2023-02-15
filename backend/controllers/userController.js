@@ -8,6 +8,7 @@ const { findById } = require('../models/userModel')
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
+    console.log("touched register controller")
     const { name, email, password } = req.body
         console.log("register controller", req.body)
     if(!name || !email || !password){
@@ -51,6 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/login
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
+    console.log("touched login controller")
     const {email, password} = req.body
 
     if(!email || !password){

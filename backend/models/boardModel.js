@@ -12,7 +12,7 @@ const boardSchema = mongoose.Schema({
     },
     columns: {
         type: [String],
-        required: false
+        default: []
     },
     tasks: {
         type: [

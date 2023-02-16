@@ -1,11 +1,18 @@
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppDispatch } from '../app/store'
-import {logout} from '../features/auth/authSlice'
+import {logout, reset} from '../features/auth/authSlice'
 
 const HeadComp = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
+  const {user} = useSelector((state: any) => state.auth)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
 
   return (
     <header className="w-48 h-screen bg-l-gray">
@@ -13,21 +20,27 @@ const HeadComp = () => {
             <Link to='/'>Dashboard</Link>
         </p>
         <ul>
-            <li>
-                <Link to='/login'>
-                    Login
-                </Link>
-            </li>
-            <li>
-                <Link to='/register'>
-                    Register
-                </Link>
-            </li>
-            <li>
-                <Link to='/login' onClick={() => dispatch(logout())}>
-                    Logout
-                </Link>
-            </li>
+            {user ? (
+                <li>
+                    <a className="logout" onClick={handleLogout}>
+                        Logout
+                    </a>
+                </li>
+            ) : (
+                <>
+                     <li>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/register'>
+                            Register
+                        </Link>
+                    </li>
+                </>
+            )}
+            
         </ul>
     </header>
   )

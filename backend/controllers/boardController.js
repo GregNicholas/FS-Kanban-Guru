@@ -65,15 +65,13 @@ const updateBoard = asyncHandler(async (req, res) => {
         throw new Error('Board not found')
     }
 
-    const user = await User.findById(req.user.id)
-
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
 
     // Make sure the logged in user matches board user
-    if(board.user.toString() !== user.id){
+    if(board.user.toString() !== requser.id){
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -97,15 +95,12 @@ const deleteBoard = asyncHandler(async (req, res) => {
         throw new Error('Board not found')
     }
 
-    const user = await User.findById(req.user.id)
-
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
-    console.log(board.user, "board user")
     // Make sure the logged in user matches board user
-    if(board.user.toString() !== user.id){
+    if(board.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')
     }

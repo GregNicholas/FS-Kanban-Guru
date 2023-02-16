@@ -49,7 +49,6 @@ const LoginForm = () => {
           email,
           password
       }
-      console.log("submit: ", userData)
       dispatch(login(userData))
   }
 

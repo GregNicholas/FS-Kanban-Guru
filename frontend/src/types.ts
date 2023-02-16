@@ -17,12 +17,12 @@ export interface Column {
 
 export interface Board {
     name: string;
-    columns: Column[];
+    columns: String[];
   }
 
 export interface indexedBoard {
     name: string;
-    columns: Column[];
+    columns: String[];
     id: number | null;
 }
 

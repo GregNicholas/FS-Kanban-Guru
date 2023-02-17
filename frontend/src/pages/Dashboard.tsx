@@ -3,7 +3,7 @@ import Header from '../components/Header/Header'
 import Sidebar from '../components/Sidebar/Sidebar'
 import BoardArea from '../components/BoardArea/BoardArea'
 import ShowSidebar from '../components/ShowSidebar'
-import { Board } from '../types'
+import { Board, indexedBoard } from '../types'
 import { AppDispatch, RootState } from "../app/store"
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +20,7 @@ const [showBoardForm, setShowBoardForm] = useState(true)
 
   const navigate = useNavigate()
   const {user} = useSelector((state: any) => state.auth)
-  const {boards, isLoading, isError, message} = useSelector((state: any) => state.boards)
+  const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
@@ -57,7 +57,13 @@ const [showBoardForm, setShowBoardForm] = useState(true)
         <h1>welcome {user && user.name}</h1>
         {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />}
 
-        <p> let's display a board name here</p>
+        <ul>
+          {boards.length > 0 ? (
+            {boards.map((board: indexedBoard) => {
+              return <li key={board._id}>{board.name}</li>
+            })}
+          ) : <h3>no boards yet</h3>}
+        </ul>
       </div>
       {!showSidebar && <ShowSidebar setShowSidebar={setShowSidebar} />}
     </div>

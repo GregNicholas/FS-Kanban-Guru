@@ -21,6 +21,7 @@ export interface Board {
   }
 
 export interface indexedBoard {
+    private _id: Key | null | undefined;
     name: string;
     columns: string[];
     id: number | null;

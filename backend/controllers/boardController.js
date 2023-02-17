@@ -51,7 +51,7 @@ const createBoard = asyncHandler(async (req, res) => {
     //         }
     //     ]
     // })
-    res.status(200).json({ message: 'create board'})
+    res.status(200).json(board)
 })
 
 // @desc Update Board

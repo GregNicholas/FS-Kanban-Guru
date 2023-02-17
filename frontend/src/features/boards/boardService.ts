@@ -10,12 +10,14 @@ const API_BASE_URL = process.env.NODE_ENV === 'development'
 const API_URL = `${API_BASE_URL}/api/boards`
 
 const addBoard = async (boardData: Board, token: String) => {
+    console.log("SLICIN IT UP: ", boardData)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
     const response = await axios.post(API_URL, boardData, config)
+    console.log("WHAT THE RESPONSE SAY?: ", response)
     return response.data
 }
 

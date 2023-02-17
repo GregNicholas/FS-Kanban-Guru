@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import ModalContainer from '../ModalContainer'
 import Button from '../Button'
 import FormLabel from './FormLabel'
-// import { RootState } from "../../app/store";
-// import { useSelector } from 'react-redux'
+import { AppDispatch, RootState } from "../../app/store";
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-// import { addBoard, editBoard } from '../../features/boardsSlice'
-// import { setDisplayBoard } from '../../features/displayBoardSlice'
+import { addBoard } from '../../features/boards/boardSlice'
+import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
 import { Board } from '../../types'
 
 type BoardFormProps = {
@@ -21,16 +21,16 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
   const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns} 
                             : {
                                 name: "",
-                                columns: [{name: 'Todo', tasks: []}, {name: 'Doing', tasks: []}]
+                                columns: ["todo", "Doing"]
                             })
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const inputTemplateStyle = "text-[13px] font-medium text-black dark:text-white border border-l-lines dark:border-m-gray rounded dark:bg-d-gray"
 
   const changeColumnInput = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const newColumns = board.columns.map(col => ({ ...col }))
-    newColumns[index].name = e.target.value
+    const newColumns = [...board.columns]
+    newColumns[index] = e.target.value
     setBoard(prev => ({
       ...prev,
       columns: newColumns
@@ -41,7 +41,7 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
     e.preventDefault()
     setBoard(prev => ({
       ...prev,
-      columns: [...prev.columns, {name: "", tasks: []}]
+      columns: [...prev.columns, ""]
     }))
   }
 
@@ -57,13 +57,13 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
     const boardData = {
           name: board.name,
           columns: board.columns,
-          id: boardIndex
+          // id: boardIndex
       }
 
     //   if(boardIndex !== null){
     //   dispatch(editBoard(boardData))
     // } else {
-    //   dispatch(addBoard(boardData))
+      dispatch(addBoard(boardData))
     // }
 
     setShowBoardForm(false)
@@ -94,7 +94,7 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
                     <div className="h-10 flex items-center w-full mb-3" key={index}>
                     <input className={`${inputTemplateStyle} h-full w-full mr-4 pl-4 py-2`}
                            onChange={(e) => changeColumnInput(index, e)}
-                           value={col.name}
+                           value={col}
                            type="text" 
                            placeholder="Column Name"
                            aria-label="new column"

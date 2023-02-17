@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 import { RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 // import { deleteBoard } from '../../features/boardsSlice'
-// import { setDisplayBoard } from '../../features/displayBoardSlice'
+import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
 
 type HeaderProps = {
     isDarkMode: boolean
@@ -28,7 +28,9 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
 
     // const displayBoardIndex = useSelector((state: RootState) => state.board.value)
     // const displayBoard = useSelector((state: RootState) => state.boards.value[displayBoardIndex])
-  
+  // temporary :
+    const displayBoard = {name: "Board ONE", columns: ["doing", "done"]};
+    
     const dispatch = useDispatch()
 
     const toggleShowTaskForm = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -49,7 +51,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
     const handleDelete = () => {
         console.log("Handle delete")
         // dispatch(deleteBoard(displayBoard.name))
-        // dispatch(setDisplayBoard(0))
+        dispatch(setDisplayBoard(0))
     }
 
     const showBoardsListMobile = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -69,7 +71,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
             <img className={`${showMobileLogo} absolute left-4 top-5 sm:left-7 sm:top-7 h-6 mb-14`} src={`/assets/logo-mobile.svg`} alt="kanban logo" />
             <div onClick={showBoardsListMobile} className={`flex items-center h-full md:pl-0 ${nameClasses}`}>
                 {!showSidebar && <div className="hidden sm:block w-px h-full mr-8 md:border-l md:border-l-lines md:dark:border-d-lines"></div>}
-                {/* <h2 onClick={showBoardsListMobile} className={`font-bold font-sans cursor-default text-black dark:text-white text-center text-lg sm:text-xl md:text-2xl`}>{displayBoard?.name}</h2> */}
+                <h2 onClick={showBoardsListMobile} className={`font-bold font-sans cursor-default text-black dark:text-white text-center text-lg sm:text-xl md:text-2xl`}>{displayBoard?.name}</h2>
                 { !showSidebar 
                     ? <img className="ml-2 sm:hidden" src={`/assets/icon-chevron-down.svg`} alt="chevron down"/>
                     : <img className="ml-2 sm:hidden" src={`/assets/icon-chevron-up.svg`} alt="chevron down"/>

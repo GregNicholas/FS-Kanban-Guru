@@ -9,7 +9,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'development'
 
 const API_URL = `${API_BASE_URL}/api/boards`
 
-const addBoard = async (boardData: indexedBoard, token: String) => {
+const addBoard = async (boardData: Board, token: String) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -52,11 +52,11 @@ const getBoards = async (token: String) => {
 // }
 
 
-const groceryService = {
+const boardService = {
     addBoard,
     getBoards,
     // updateBoard,
     // deleteBoard,
 }
 
-export default groceryService
+export default boardService

@@ -17,7 +17,7 @@ type TaskFormProps = {
 }
 
 const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, toggleTaskView=null }:TaskFormProps) => {
-  const columns = board.columns.map(column => column.name)
+  const columns = [...board.columns]
   let columnName = column ? column : columns[0]
 
   const dispatch = useDispatch()

@@ -39,8 +39,8 @@ export const getBoards = createAsyncThunk('boards/getAll', async (_, thunkAPI: a
 })
 
 export const addBoard = 
-    createAsyncThunk('groceries/create', 
-    async (boardData: indexedBoard, thunkAPI: any) => {
+    createAsyncThunk('boards/create', 
+    async (boardData: Board, thunkAPI: any) => {
         try {
             const token = thunkAPI.getState().auth.user.token
             return await boardService.addBoard(boardData, token)
@@ -57,7 +57,7 @@ export const addBoard =
     })
 
 export const boardSlice = createSlice({
-    name: "boards",
+    name: "board",
     initialState,
     reducers: {
         reset: (state) => initialState
@@ -77,43 +77,43 @@ export const boardSlice = createSlice({
             state.isError = true
             state.message = action.payload as string
           })
-          .addCase(getBoards.pending, (state) => {
-            state.isLoading = true
-          })
-          .addCase(getBoards.fulfilled, (state, action) => {
-            state.isLoading = false
-            state.isSuccess = true
-            state.boards = action.payload
-          })
-          .addCase(getBoards.rejected, (state, action) => {
-            state.isLoading = false
-            state.isError = true
-            state.message = action.payload as string
-          })
-        //   .addCase(updateGrocery.pending, (state) => {
+    //       .addCase(getBoards.pending, (state) => {
+    //         state.isLoading = true
+    //       })
+    //       .addCase(getBoards.fulfilled, (state, action) => {
+    //         state.isLoading = false
+    //         state.isSuccess = true
+    //         state.boards = action.payload
+    //       })
+    //       .addCase(getBoards.rejected, (state, action) => {
+    //         state.isLoading = false
+    //         state.isError = true
+    //         state.message = action.payload as string
+    //       })
+        //   .addCase(updateBoard.pending, (state) => {
         //     state.isLoading = true
         //   })
-        //   .addCase(updateGrocery.fulfilled, (state, action) => {
+        //   .addCase(updateBoard.fulfilled, (state, action) => {
         //     state.isLoading = false
         //     state.isSuccess = true
-        //     state.groceries = state.groceries.map((grocery) => {
-        //       return grocery._id === action.payload._id ? action.payload : grocery})
+        //     state.groceries = state.groceries.map((board) => {
+        //       return board._id === action.payload._id ? action.payload : board})
         //   })
-        //   .addCase(updateGrocery.rejected, (state, action) => {
+        //   .addCase(updateBoard.rejected, (state, action) => {
         //     state.isLoading = false
         //     state.isError = true
         //     state.message = action.payload
         //   })
-        //   .addCase(deleteGrocery.pending, (state) => {
+        //   .addCase(deleteBoard.pending, (state) => {
         //     state.isLoading = true
         //   })
-        //   .addCase(deleteGrocery.fulfilled, (state, action) => {
+        //   .addCase(deleteBoard.fulfilled, (state, action) => {
         //     state.isLoading = false
         //     state.isSuccess = true
         //     state.groceries = state.groceries.filter((grocery) => {
         //       return grocery._id !== action.payload.id})
         //   })
-        //   .addCase(deleteGrocery.rejected, (state, action) => {
+        //   .addCase(deleteBoard.rejected, (state, action) => {
         //     state.isLoading = false
         //     state.isError = true
         //     state.message = action.payload
@@ -184,5 +184,5 @@ export const boardSlice = createSlice({
 //     // editBoard, deleteBoard, addTask, editTask, editSubtasks, changeTaskStatus, deleteTask 
 // } = boardsSlice.actions
 
-export default boardSlice.reducer
 export const {reset} = boardSlice.actions
+export default boardSlice.reducer

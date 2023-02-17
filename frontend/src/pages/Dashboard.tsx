@@ -4,12 +4,13 @@ import Sidebar from '../components/Sidebar/Sidebar'
 import BoardArea from '../components/BoardArea/BoardArea'
 import ShowSidebar from '../components/ShowSidebar'
 import { Board } from '../types'
-import { RootState } from "../app/store"
+import { AppDispatch, RootState } from "../app/store"
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getBoards } from '../features/boards/boardSlice'
+import { getBoards, reset } from '../features/boards/boardSlice'
 import data from '../data.json'
 import BoardForm from '../components/Forms/BoardForm'
+import Loader from '../components/Loader'
 
 function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
@@ -19,15 +20,27 @@ const [showBoardForm, setShowBoardForm] = useState(true)
 
   const navigate = useNavigate()
   const {user} = useSelector((state: any) => state.auth)
-  const {boards} = useSelector((state: any) => state.boards)
-  const dispatch = useDispatch()
+  const {boards, isLoading, isError, message} = useSelector((state: any) => state.boards)
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
-    // dispatch(getBoards())    
+    if(isError){
+      console.log(message)
+    }
     if(!user) {
       navigate('/login')
     }
-  }, [user, navigate])
+
+    dispatch(getBoards()) 
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch])
+
+  if(isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className={`flex h-full ${isDarkMode && "dark"}`}>

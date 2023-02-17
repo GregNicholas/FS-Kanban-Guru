@@ -22,7 +22,7 @@ const initialState: StateData = {
     message: '',
 }
 
-export const getBoards = createAsyncThunk('boards/getAll', async (_, thunkAPI: any) =>{
+export const getBoards = createAsyncThunk('boards/getAll', async (_, thunkAPI: any) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await boardService.getBoards(token)
@@ -77,19 +77,19 @@ export const boardSlice = createSlice({
             state.isError = true
             state.message = action.payload as string
           })
-    //       .addCase(getBoards.pending, (state) => {
-    //         state.isLoading = true
-    //       })
-    //       .addCase(getBoards.fulfilled, (state, action) => {
-    //         state.isLoading = false
-    //         state.isSuccess = true
-    //         state.boards = action.payload
-    //       })
-    //       .addCase(getBoards.rejected, (state, action) => {
-    //         state.isLoading = false
-    //         state.isError = true
-    //         state.message = action.payload as string
-    //       })
+          .addCase(getBoards.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(getBoards.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.boards = action.payload
+          })
+          .addCase(getBoards.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload as string
+          })
         //   .addCase(updateBoard.pending, (state) => {
         //     state.isLoading = true
         //   })

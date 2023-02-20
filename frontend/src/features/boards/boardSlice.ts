@@ -8,6 +8,7 @@ interface boardsState {
 
 interface StateData {
     boards: Board[],
+    // indexedBoard?
     isError: boolean,
     isSuccess: boolean,
     isLoading: boolean,

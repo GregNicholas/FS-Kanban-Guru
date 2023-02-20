@@ -41,7 +41,14 @@ const [showBoardForm, setShowBoardForm] = useState(true)
   if(isLoading) {
     return <Loader />
   }
-
+  console.log("Hello", typeof boards)
+  if(boards.length>0){
+    boards.map(board => {
+      console.log("b id: ", board._id, "b name: ", board.name)
+    })
+  } else {
+    console.log("no boards")
+  }
   return (
     <div className={`flex h-full ${isDarkMode && "dark"}`}>
       <Sidebar 
@@ -59,9 +66,9 @@ const [showBoardForm, setShowBoardForm] = useState(true)
 
         <ul>
           {boards.length > 0 ? (
-            {boards.map((board: indexedBoard) => {
+            boards.map((board) => {
               return <li key={board._id}>{board.name}</li>
-            })}
+            })
           ) : <h3>no boards yet</h3>}
         </ul>
       </div>

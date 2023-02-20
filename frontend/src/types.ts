@@ -1,3 +1,5 @@
+// import { Key } from "react";
+
 export interface Subtask {
     title: string;
     isCompleted: boolean;
@@ -16,12 +18,13 @@ export interface Column {
 }
 
 export interface Board {
+    _id?: string;
     name: string;
     columns: string[];
   }
 
 export interface indexedBoard {
-    private _id: Key | null | undefined;
+    // private _id: Key | null | undefined;
     name: string;
     columns: string[];
     id: number | null;

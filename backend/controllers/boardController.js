@@ -7,6 +7,7 @@ const User = require('../models/userModel')
 // @route GET /api/boards
 // @access Private
 const getBoards = asyncHandler(async (req, res) => {
+    console.log("getting boards ROUTE")
     const boards = await Board.find({ user: req.user.id})
 
     res.status(200).json(boards)
@@ -16,6 +17,7 @@ const getBoards = asyncHandler(async (req, res) => {
 // @route POST /api/boards
 // @access Private
 const createBoard = asyncHandler(async (req, res) => {
+    console.log("create board ROUTE")
     console.log(req.body.columns)
     if(!req.body) {
         res.status(400)
@@ -58,6 +60,7 @@ const createBoard = asyncHandler(async (req, res) => {
 // @route PUT /api/boards/:id
 // @access Private
 const updateBoard = asyncHandler(async (req, res) => {
+    console.log("update Board ROUTE")
     const board = await Board.findById(req.params.id)
 
     if(!board) {
@@ -71,7 +74,7 @@ const updateBoard = asyncHandler(async (req, res) => {
     }
 
     // Make sure the logged in user matches board user
-    if(board.user.toString() !== requser.id){
+    if(board.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -88,6 +91,7 @@ const updateBoard = asyncHandler(async (req, res) => {
 // @route DELETE /api/boards/:id
 // @access Private
 const deleteBoard = asyncHandler(async (req, res) => {
+    console.log("delete board ROUTE")
     const board = await Board.findById(req.params.id)
 
     if(!board) {

@@ -15,7 +15,7 @@ const HeadComp = () => {
   }
 
   return (
-    <header className="w-48 h-screen bg-l-gray">
+    <header className="w-24 h-screen bg-l-gray">
         <p>
             <Link to='/'>Dashboard</Link>
         </p>

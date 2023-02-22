@@ -16,7 +16,7 @@ function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
   const [showSidebar, setShowSidebar] = useState<boolean>(true)
 // TEMP: 
-const [showBoardForm, setShowBoardForm] = useState(true)
+const [showBoardForm, setShowBoardForm] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
@@ -55,17 +55,17 @@ const [showBoardForm, setShowBoardForm] = useState(true)
             isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
             showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
          /> */}
-        {/* <BoardArea /> */}
+        <BoardArea />
         <h1>welcome {user && user.name}</h1>
         {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />}
 
-        <ul>
+        {/* <ul>
           {boards.length > 0 ? (
             boards.map((board) => {
               return <li key={board._id}>{board.name}</li>
             })
           ) : <h3>no boards yet</h3>}
-        </ul>
+        </ul> */}
       </div>
       {!showSidebar && <ShowSidebar setShowSidebar={setShowSidebar} />}
     </div>

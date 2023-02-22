@@ -27,8 +27,12 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   const currentStatus = task.status
   const dispatch = useDispatch()
 
-  const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-  const board = useSelector((state: RootState) => state.boards.value[displayBoardIndex])
+  // const displayBoardIndex = useSelector((state: RootState) => state.board.value)
+  const displayBoardIndex = 2
+  // const board = useSelector((state: RootState) => state.boards[displayBoardIndex])
+  const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
+  // const displayBoard = boards[displayBoardIndex]
+  const displayBoard = boards[2]
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newTask = {...task, status: e.target.value}
@@ -56,7 +60,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   return (
     <ModalContainer>
       {
-        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={board} column={column} setShowTaskForm={setShowEditTask} toggleTaskView={toggleTaskView}/>
+        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={displayBoard} column={column} setShowTaskForm={setShowEditTask} toggleTaskView={toggleTaskView}/>
         : showDeleteWarning 
         ? <DeleteWarning 
             closeModal={() => setShowDeleteWarning(false)} 

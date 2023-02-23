@@ -3,7 +3,6 @@ import Dashboard from './pages/Dashboard';
 import Authentication from './components/Auth/Authentication';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import HeadComp from './components/HeadComp';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,14 +10,11 @@ function App() {
   return (
     <>
       <Router>
-        <div className="min-h-screen flex justify-center items-center">
-          <HeadComp />
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
           </Routes>
-        </div>
       </Router>
       <ToastContainer />
     </>

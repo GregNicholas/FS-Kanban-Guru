@@ -26,10 +26,9 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
     const [showDeleteWarning, setShowDeleteWarning] = useState(false)
     const [showBoardForm, setShowBoardForm] = useState(false)
 
-    // const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-    // const displayBoard = useSelector((state: RootState) => state.boards.value[displayBoardIndex])
-  // temporary :
-    const displayBoard = {name: "Board ONE", columns: ["doing", "done"]};
+    const displayBoardIndex = useSelector((state: RootState) => state.board.value)
+    const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
+    const displayBoard = boards[displayBoardIndex]
     
     const dispatch = useDispatch()
 
@@ -78,7 +77,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
                 }
             </div>
             <div>
-                {/* { displayBoard?.name  
+                { displayBoard?.name  
                 ? <>
                     <span className="hidden md:inline"><Button text=" + Add New Task " onClick={toggleShowTaskForm} widthFull={false} /></span>
                     <button 
@@ -97,23 +96,23 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
                     />
                     </div>
                   </>
-                : null } */}
-                {/* {showTaskForm && <TaskForm setShowTaskForm={setShowTaskForm} board={displayBoard} title="Add New Task" />} */}
+                : null }
+                {showTaskForm && <TaskForm setShowTaskForm={setShowTaskForm} board={displayBoard} title="Add New Task" />}
                 {showModal && <EditModal 
                                 editText="Edit Board" 
                                 deleteText="Delete Board"
                                 handleEdit={setShowBoardForm}
                                 handleDelete={(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => handleDeleteWarning(e)}
                             />}
-                {/* {showDeleteWarning && 
+                {showDeleteWarning && 
                     <DeleteWarning 
                         closeModal={() => setShowDeleteWarning(false)} 
                         handleDelete={handleDelete}
                         title="Delete this board?"
-                        // message={`Are you sure you want to delete the ‘${displayBoard?.name}’ board? This action will remove all columns and tasks and cannot be reversed.`}
+                        message={`Are you sure you want to delete the ‘${displayBoard?.name}’ board? This action will remove all columns and tasks and cannot be reversed.`}
                     />
-                } */}
-                {/* {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />} */}
+                }
+                {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />}
             </div>
             <div className="sm:hidden">
             {showSidebar && 

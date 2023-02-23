@@ -16,7 +16,7 @@ function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
   const [showSidebar, setShowSidebar] = useState<boolean>(true)
 // TEMP: 
-const [showBoardForm, setShowBoardForm] = useState(false)
+// const [showBoardForm, setShowBoardForm] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
@@ -51,13 +51,13 @@ const [showBoardForm, setShowBoardForm] = useState(false)
           showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
       />
       <div className="flex flex-col flex-1 overflow-auto" tabIndex={0}>
-      {/*   <Header 
+        <Header 
             isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
             showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
-         /> */}
+         />
         <BoardArea />
-        <h1>welcome {user && user.name}</h1>
-        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />}
+        {/* <h1>welcome {user && user.name}</h1>
+        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />} */}
 
         {/* <ul>
           {boards.length > 0 ? (

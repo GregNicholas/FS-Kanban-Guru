@@ -12,8 +12,15 @@ interface LoginData {
     password: string
 }
 
+interface User {
+    name: string,
+    token: string,
+    email: string,
+    _id: string
+  }
+
 interface StateData {
-    user: string | null,
+    user: User | null,
     isError: boolean,
     isSuccess: boolean,
     isLoading: boolean,
@@ -21,11 +28,10 @@ interface StateData {
 }
 
 // Get user from local storage
-let user: string | null = localStorage.getItem('user')
-if(user){
-    user = JSON.parse(user)
-}
-// const user = JSON.parse(localStorage.getItem('user'))
+let user: User | null = JSON.parse(localStorage.getItem('user') as string)
+// if(user){
+//     user = JSON.parse(user)
+// }
 
 const initialState : StateData = {
     user: user ? user : null,

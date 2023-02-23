@@ -24,7 +24,6 @@ const Sidebar = (
     }:SidebarProps) => {
         const navigate = useNavigate()
         const dispatch = useDispatch<AppDispatch>()
-        const {user} = useSelector((state: any) => state.auth)
 
         const handleLogout = () => {
             dispatch(logout())

@@ -2,13 +2,8 @@ import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit'
 import boardService from './boardService'
 import { Board, Task, indexedBoard } from "../../types"
 
-interface boardsState {
-    value: Board[]
-}
-
 interface StateData {
     boards: Board[],
-    // indexedBoard?
     isError: boolean,
     isSuccess: boolean,
     isLoading: boolean,

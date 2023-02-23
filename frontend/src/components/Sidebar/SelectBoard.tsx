@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux'
 const SelectBoard = () => {
   const [ showBoardForm, setShowBoardForm ] = useState(false)
   const {boards: boardsData, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
-
+  const {user} = useSelector((state: RootState) => state.auth)
+  const userName: string = user?.name ? user.name : "User"
 
   return (
     <section className="text-base font-bold text-m-gray fill-m-gray" 
@@ -16,7 +17,7 @@ const SelectBoard = () => {
               }
              }
     >
-        <h3 className="text-xs mb-4 pl-8 tracking-widest">ALL BOARDS ({boardsData?.length})</h3>
+        <h3 className="text-xs mb-4 pl-8 tracking-widest">{userName}'s BOARDS ({boardsData?.length})</h3>
         {boardsData && <ul className="cursor-pointer">
             {boardsData.map((board, index) => {
                 return <SelectBoardTitle key={board.name} 

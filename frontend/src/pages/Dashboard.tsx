@@ -20,7 +20,7 @@ function Dashboard() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
-  const {user} = useSelector((state: any) => state.auth)
+  const {user} = useSelector((state: RootState) => state.auth)
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
 
   if(isError){
@@ -56,16 +56,6 @@ function Dashboard() {
             showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
          />
         <BoardArea />
-        {/* <h1>welcome {user && user.name}</h1>
-        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />} */}
-
-        {/* <ul>
-          {boards.length > 0 ? (
-            boards.map((board) => {
-              return <li key={board._id}>{board.name}</li>
-            })
-          ) : <h3>no boards yet</h3>}
-        </ul> */}
       </div>
       {!showSidebar && <ShowSidebar setShowSidebar={setShowSidebar} />}
     </div>

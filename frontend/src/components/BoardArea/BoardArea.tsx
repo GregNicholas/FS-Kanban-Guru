@@ -8,17 +8,16 @@ import { useSelector } from 'react-redux'
 
 const BoardArea = () => {
   const [showBoardForm, setShowBoardForm] = useState(false)
-  // const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-  // const displayBoard = useSelector((state: RootState) => state.boards[displayBoardIndex])
+
+  // get boards and index of current selected board from state
+  const displayBoardIndex = useSelector((state: RootState) => state.board.value)
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
-  // const displayBoard = boards[displayBoardIndex]
-  const displayBoard = boards[2]
+  const displayBoard = boards[displayBoardIndex]
 
   const addColumn = () => {
       setShowBoardForm((prev: boolean) => !prev)
   }
 
-// const columns:string[] = displayBoard?.columns.map(column => column.name)
 const columns:string[] = displayBoard?.columns
 
 return (
@@ -42,7 +41,7 @@ return (
             <NewColumn onClick={addColumn} />
           </div>
         }
-        {/* {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />} */}
+        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />}
     </main>
   )
 }

@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 
 const SelectBoard = () => {
   const [ showBoardForm, setShowBoardForm ] = useState(false)
-  // const boardsData = useSelector((state: RootState) => state.boards.value)
   const {boards: boardsData, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
 
 

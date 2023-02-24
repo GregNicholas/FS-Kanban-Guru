@@ -17,11 +17,11 @@ type BoardFormProps = {
 }
 
 const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null }:BoardFormProps) => {
-
-  const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns} 
+  const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns, tasks: currentBoard.tasks} 
                             : {
                                 name: "",
-                                columns: ["todo", "Doing"]
+                                columns: ["todo", "Doing"],
+                                tasks: []
                             })
 
   const dispatch = useDispatch<AppDispatch>()
@@ -57,6 +57,7 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
     const boardData = {
           name: board.name,
           columns: board.columns,
+          tasks: board.tasks
           // id: boardIndex
       }
 

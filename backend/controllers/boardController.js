@@ -17,8 +17,6 @@ const getBoards = asyncHandler(async (req, res) => {
 // @route POST /api/boards
 // @access Private
 const createBoard = asyncHandler(async (req, res) => {
-    console.log("create board ROUTE")
-    console.log(req.body.columns)
     if(!req.body) {
         res.status(400)
         throw new Error('Please add board data')
@@ -91,7 +89,6 @@ const updateBoard = asyncHandler(async (req, res) => {
 // @route DELETE /api/boards/:id
 // @access Private
 const deleteBoard = asyncHandler(async (req, res) => {
-    console.log("delete board ROUTE")
     const board = await Board.findById(req.params.id)
 
     if(!board) {
@@ -109,9 +106,8 @@ const deleteBoard = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    await board.remove()
-
-    res.status(200).json({ message: `delete board ${req.params.id}`, board: deleted})
+    const removed = await board.remove()
+    res.status(200).json(removed)
 })
 
 module.exports = {

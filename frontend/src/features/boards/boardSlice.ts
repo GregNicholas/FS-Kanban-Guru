@@ -52,6 +52,24 @@ export const addBoard =
         }
     })
 
+export const deleteBoard = 
+    createAsyncThunk('boards/delete',
+    async (id: string, thunkAPI: any) => {
+      try {
+        const token = thunkAPI.getState().auth.user.token
+        return await boardService.deleteBoard(id, token)
+      } catch(err: any) {
+        console.log("Error deleting board: ", err)
+        const message = 
+            (err.response && 
+              err.response.data && 
+              err.response.data.message) || 
+            err.message || 
+            err.toString()
+        return thunkAPI.rejectWithValue(message)
+      }
+    })
+
 export const boardSlice = createSlice({
     name: "board",
     initialState,
@@ -100,20 +118,20 @@ export const boardSlice = createSlice({
         //     state.isError = true
         //     state.message = action.payload
         //   })
-        //   .addCase(deleteBoard.pending, (state) => {
-        //     state.isLoading = true
-        //   })
-        //   .addCase(deleteBoard.fulfilled, (state, action) => {
-        //     state.isLoading = false
-        //     state.isSuccess = true
-        //     state.groceries = state.groceries.filter((grocery) => {
-        //       return grocery._id !== action.payload.id})
-        //   })
-        //   .addCase(deleteBoard.rejected, (state, action) => {
-        //     state.isLoading = false
-        //     state.isError = true
-        //     state.message = action.payload
-        //   })
+          .addCase(deleteBoard.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(deleteBoard.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.boards = state.boards.filter((board) => {
+              return board._id !== action.payload._id})
+          })
+          .addCase(deleteBoard.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload as string
+          })
     }
         // getExistingBoards: (state, action: PayloadAction<Board[]>) => {
         //     state.value = action.payload

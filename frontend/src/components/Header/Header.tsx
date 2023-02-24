@@ -8,9 +8,9 @@ import BoardForm from '../Forms/BoardForm'
 import Sidebar from '../Sidebar/Sidebar'
 import ModalContainer from '../ModalContainer'
 import { useDispatch } from 'react-redux'
-import { RootState } from "../../app/store";
+import { AppDispatch, RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
-// import { deleteBoard } from '../../features/boardsSlice'
+import { deleteBoard } from '../../features/boards/boardSlice'
 import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
 
 type HeaderProps = {
@@ -30,7 +30,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
     const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
     const displayBoard = boards[displayBoardIndex]
     
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const toggleShowTaskForm = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation()
@@ -48,8 +48,9 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
       }
 
     const handleDelete = () => {
-        console.log("Handle delete")
-        // dispatch(deleteBoard(displayBoard.name))
+        if(displayBoard._id){
+            dispatch(deleteBoard(displayBoard._id))
+        }
         dispatch(setDisplayBoard(0))
     }
 

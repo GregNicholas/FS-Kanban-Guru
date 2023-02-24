@@ -28,10 +28,10 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    console.log("USER??? ", user)
     if(!user) {
       navigate('/login')
     } else {
+      console.log("Get boards in dashboard")
       dispatch(getBoards()) 
     }
 

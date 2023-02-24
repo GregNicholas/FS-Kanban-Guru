@@ -7,27 +7,35 @@ const API_BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:2121'
     : 'https://your-production-api-url.com'
 
-const API_URL = `${API_BASE_URL}/api/boards`
+const API_URL = `${API_BASE_URL}/api/boards/`
 
-const addBoard = async (boardData: Board, token: String) => {
-    console.log("SLICIN IT UP: ", boardData)
+const addBoard = async (boardData: Board, token: string) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
     const response = await axios.post(API_URL, boardData, config)
-    console.log("WHAT THE RESPONSE SAY?: ", response)
     return response.data
 }
 
-const getBoards = async (token: String) => {
+const getBoards = async (token: string) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
     const response = await axios.get(API_URL, config)
+    return response.data
+}
+
+const deleteBoard = async (id: string, token: string) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.delete(API_URL + id, config)
     return response.data
 }
 
@@ -58,7 +66,7 @@ const boardService = {
     addBoard,
     getBoards,
     // updateBoard,
-    // deleteBoard,
+    deleteBoard,
 }
 
 export default boardService

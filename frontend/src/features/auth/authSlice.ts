@@ -28,10 +28,15 @@ interface StateData {
 }
 
 // Get user from local storage
-let user: User | null = JSON.parse(localStorage.getItem('user') as string)
+// let user: User | null = JSON.parse(localStorage.getItem('user') as string)
 // if(user){
 //     user = JSON.parse(user)
 // }
+let user: User|null = null
+const storedUser = localStorage.getItem('user')
+if(storedUser){
+    user = JSON.parse(storedUser)
+}
 
 const initialState : StateData = {
     user: user ? user : null,

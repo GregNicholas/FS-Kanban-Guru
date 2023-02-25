@@ -9,34 +9,51 @@ const API_BASE_URL = process.env.NODE_ENV === 'development'
 
 const API_URL = `${API_BASE_URL}/api/boards/`
 
-const addBoard = async (boardData: Board, token: string) => {
-    const config = {
+const getConfig = (token: string) => {
+    return {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
+}
+
+const addBoard = async (boardData: Board, token: string) => {
+    // const config = {
+    //     headers: {
+    //         Authorization: `Bearer ${token}`
+    //     }
+    // }
+    const config = getConfig(token);
     const response = await axios.post(API_URL, boardData, config)
     return response.data
 }
 
 const getBoards = async (token: string) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
+    // const config = {
+    //     headers: {
+    //         Authorization: `Bearer ${token}`
+    //     }
+    // }
+    const config = getConfig(token);
     const response = await axios.get(API_URL, config)
     return response.data
 }
 
 const deleteBoard = async (id: string, token: string) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
+    // const config = {
+    //     headers: {
+    //         Authorization: `Bearer ${token}`
+    //     }
+    // }
+    const config = getConfig(token);
     const response = await axios.delete(API_URL + id, config)
     return response.data
+}
+
+const updateBoard = async (boardData: Board, token: string) => {
+    console.log("TO UPDATE BOARD: ", boardData)
+    const config = getConfig(token)
+    // const response = await axios.put(API_URL )
 }
 
 // const updateGrocery = async (updateData, token) => {
@@ -51,21 +68,10 @@ const deleteBoard = async (id: string, token: string) => {
 //     return response.data
 // }
 
-// const deleteGrocery = async (groceryId, token) => {
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     }
-//     const response = await axios.delete(API_URL + groceryId, config)
-//     return response.data
-// }
-
-
 const boardService = {
     addBoard,
     getBoards,
-    // updateBoard,
+    updateBoard,
     deleteBoard,
 }
 

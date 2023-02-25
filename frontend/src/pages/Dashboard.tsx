@@ -40,12 +40,13 @@ function Dashboard() {
     }
   }, [user, dispatch])
  
-  if(isLoading) {
-    return <Loader />
-  }
+  // if(isLoading) {
+  //   return <Loader />
+  // }
   
   return (
     <div className={`flex h-full ${isDarkMode && "dark"}`}>
+      {isLoading && <Loader />}
       <Sidebar 
           isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
           showSidebar={showSidebar} setShowSidebar={setShowSidebar} 

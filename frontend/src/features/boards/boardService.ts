@@ -18,42 +18,30 @@ const getConfig = (token: string) => {
 }
 
 const addBoard = async (boardData: Board, token: string) => {
-    // const config = {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`
-    //     }
-    // }
     const config = getConfig(token);
     const response = await axios.post(API_URL, boardData, config)
     return response.data
 }
 
 const getBoards = async (token: string) => {
-    // const config = {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`
-    //     }
-    // }
     const config = getConfig(token);
     const response = await axios.get(API_URL, config)
     return response.data
 }
 
 const deleteBoard = async (id: string, token: string) => {
-    // const config = {
-    //     headers: {
-    //         Authorization: `Bearer ${token}`
-    //     }
-    // }
     const config = getConfig(token);
     const response = await axios.delete(API_URL + id, config)
     return response.data
 }
 
 const updateBoard = async (boardData: Board, token: string) => {
-    console.log("TO UPDATE BOARD: ", boardData)
+    console.log("TO UPDATE BOARD: ", boardData._id)
+    const boardId = boardData._id;
+    const data = boardData;
     const config = getConfig(token)
-    // const response = await axios.put(API_URL )
+    const response = await axios.put(API_URL+boardId, data, config)
+    return response.data
 }
 
 // const updateGrocery = async (updateData, token) => {

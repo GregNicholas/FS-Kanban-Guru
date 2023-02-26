@@ -5,6 +5,7 @@ import NewColumn from './NewColumn'
 import BoardForm from '../Forms/BoardForm'
 import { RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
+import { Board } from '../../types'
 
 const BoardArea = () => {
   const [showBoardForm, setShowBoardForm] = useState(false)
@@ -12,7 +13,7 @@ const BoardArea = () => {
   // get boards and index of current selected board from state
   const displayBoardIndex = useSelector((state: RootState) => state.board.value)
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
-  const displayBoard = boards[displayBoardIndex]
+  const displayBoard: Board = boards[displayBoardIndex]
 
   const addColumn = () => {
       setShowBoardForm((prev: boolean) => !prev)
@@ -38,10 +39,10 @@ return (
             {displayBoard.columns.map((column, index) => (
                 <BoardColumn key={`${column}${index}`} index={index} columns={displayBoard.columns} column={column} tasks={displayBoard.tasks} />
             )) }
-            <NewColumn onClick={addColumn} />
+            <NewColumn addColumn={addColumn} />
           </div>
         }
-        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />}
+        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />}
     </main>
   )
 }

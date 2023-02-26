@@ -52,6 +52,24 @@ export const addBoard =
         }
     })
 
+export const updateBoard = 
+    createAsyncThunk('boards/update',
+    async (boardData: Board, thunkAPI: any) => {
+      try {
+        const token = thunkAPI.getState().auth.user.token
+        return await boardService.updateBoard(boardData, token)
+      } catch (err: any) {
+          console.log("update Error: ", err)
+          const message = 
+            (err.response &&
+              err.response.data &&
+              err.response.data.message) ||
+            err.message ||
+            err.toString()
+          return thunkAPI.rejectWithValue(message)
+      }
+    })
+
 export const deleteBoard = 
     createAsyncThunk('boards/delete',
     async (id: string, thunkAPI: any) => {
@@ -104,20 +122,20 @@ export const boardSlice = createSlice({
             state.isError = true
             state.message = action.payload as string
           })
-        //   .addCase(updateBoard.pending, (state) => {
-        //     state.isLoading = true
-        //   })
-        //   .addCase(updateBoard.fulfilled, (state, action) => {
-        //     state.isLoading = false
-        //     state.isSuccess = true
-        //     state.groceries = state.groceries.map((board) => {
-        //       return board._id === action.payload._id ? action.payload : board})
-        //   })
-        //   .addCase(updateBoard.rejected, (state, action) => {
-        //     state.isLoading = false
-        //     state.isError = true
-        //     state.message = action.payload
-        //   })
+          .addCase(updateBoard.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(updateBoard.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.boards = state.boards.map((board) => {
+              return board._id === action.payload._id ? action.payload : board})
+          })
+          .addCase(updateBoard.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload as string
+          })
           .addCase(deleteBoard.pending, (state) => {
             state.isLoading = true
           })

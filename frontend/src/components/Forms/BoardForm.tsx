@@ -5,22 +5,22 @@ import FormLabel from './FormLabel'
 import { AppDispatch, RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { addBoard } from '../../features/boards/boardSlice'
+import { addBoard, updateBoard } from '../../features/boards/boardSlice'
 import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
 import { Board } from '../../types'
 
 type BoardFormProps = {
   setShowBoardForm: React.Dispatch<React.SetStateAction<boolean>>
   title: string
-  boardIndex?: number | null
+  // boardIndex?: number | null
   currentBoard?: Board | null
 }
 
-const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null }:BoardFormProps) => {
-  const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns, tasks: currentBoard.tasks} 
+const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps) => {
+  const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns, tasks: currentBoard.tasks, _id: currentBoard._id} 
                             : {
                                 name: "",
-                                columns: ["todo", "Doing"],
+                                columns: ["todo", "doing"],
                                 tasks: []
                             })
 
@@ -57,15 +57,16 @@ const BoardForm = ({ setShowBoardForm, title, boardIndex=null, currentBoard=null
     const boardData = {
           name: board.name,
           columns: board.columns,
-          tasks: board.tasks
-          // id: boardIndex
+          tasks: board.tasks,
+          _id: board._id
       }
 
-    //   if(boardIndex !== null){
-    //   dispatch(editBoard(boardData))
-    // } else {
+    if(title === "Edit Board"){
+      dispatch(updateBoard(boardData))
+    } else {
+      console.log("clicked submit in add Board form")
       dispatch(addBoard(boardData))
-    // }
+    }
 
     setShowBoardForm(false)
   }

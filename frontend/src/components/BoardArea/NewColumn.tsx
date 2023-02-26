@@ -1,11 +1,11 @@
 type NewColumnProps = {
-  onClick: () => void;
+  addColumn: () => void;
 }
 
-const NewColumn = ({ onClick }:NewColumnProps) => {
+const NewColumn = ({ addColumn }:NewColumnProps) => {
   return (
     <div 
-      onClick={onClick}
+      onClick={addColumn}
       className="flex items-center justify-center cursor-pointer text-m-gray hover:text-main-purple bg-[#E9EFFA] dark:bg-d-gray w-70 rounded-lg mt-10 mb-7 mr-48"
     >
       <p className="font-bold text-2xl">+ New Column</p>

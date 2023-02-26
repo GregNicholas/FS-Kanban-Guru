@@ -29,11 +29,23 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
   const inputTemplateStyle = "text-[13px] font-medium text-black dark:text-white border border-l-lines dark:border-m-gray rounded dark:bg-d-gray"
 
   const changeColumnInput = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    let newTasks = [...board.tasks].map(task => {
+      if(task.status === board.columns[index]){
+        return {
+          ...task,
+          status: e.target.value
+        }
+      } else {
+        return task
+      }
+    })
     const newColumns = [...board.columns]
     newColumns[index] = e.target.value
+    console.log(newTasks)
     setBoard(prev => ({
       ...prev,
-      columns: newColumns
+      columns: newColumns,
+      tasks: newTasks
     }))
   }
 

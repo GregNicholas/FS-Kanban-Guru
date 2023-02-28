@@ -8,7 +8,8 @@ import DeleteWarning from '../DeleteWarning'
 import { AppDispatch, RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-// import { addTask, deleteTask, editSubtasks } from '../../features/boardsSlice'
+import { updateBoard } from '../../features/boards/boardSlice'
+import { deepCopy } from '../../utils/utils'
 import { Task } from '../../types'
 
 type TaskModalProps = {
@@ -23,19 +24,27 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   const [showModal, setShowModal] = useState(false)
   const [showEditTask, setShowEditTask] = useState(false)
   const [showDeleteWarning, setShowDeleteWarning] = useState(false)
+  const [currentStatus, setCurrentStatus] = useState(task.status)
   const subtasks = [...task.subtasks]
-  const currentStatus = task.status
   const dispatch = useDispatch<AppDispatch>()
 
   const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-  // const board = useSelector((state: RootState) => state.boards[displayBoardIndex])
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
-  const displayBoard = boards[displayBoardIndex]
+  const editableBoard = deepCopy(boards[displayBoardIndex])
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurrentStatus(e.target.value)
     const newTask = {...task, status: e.target.value}
-    // dispatch(deleteTask({taskTitle: task.title, boardName: board.name, columnName: column}))
-    // dispatch(addTask({task: newTask, boardName: board.name, columnName: column})) 
+    console.log(newTask)
+    editableBoard.tasks = editableBoard.tasks.map(task => {
+      if(task.title === newTask.title){
+        return newTask
+      } else {
+        return task
+      }
+    })
+    dispatch(updateBoard(editableBoard))
+    toggleTaskView()
   }
 
   const changeSubtaskStatus = (title: string) => {
@@ -58,7 +67,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   return (
     <ModalContainer>
       {
-        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={displayBoard} column={column} setShowTaskForm={setShowEditTask} toggleTaskView={toggleTaskView}/>
+        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={editableBoard} column={column} setShowTaskForm={setShowEditTask} toggleTaskView={toggleTaskView}/>
         : showDeleteWarning 
         ? <DeleteWarning 
             closeModal={() => setShowDeleteWarning(false)} 

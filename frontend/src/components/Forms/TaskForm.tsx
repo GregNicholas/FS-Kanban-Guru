@@ -21,7 +21,8 @@ type TaskFormProps = {
 const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, toggleTaskView=null }:TaskFormProps) => {
   const columns = [...board.columns]
   let columnName = column ? column : columns[0]
-
+  const mutableBoardData = deepCopy(board)
+  
   const dispatch = useDispatch<AppDispatch>()
 
   const [task, setTask] = useState<Task>(currentTask 
@@ -68,15 +69,13 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const mutableBoardData = deepCopy(board)
-    const newTask = {title: task.title, description: task.description, status: task.status, subtasks: [...task.subtasks]}
 
     if(!currentTask){
-      mutableBoardData.tasks.unshift(newTask)
+      mutableBoardData.tasks.unshift(task)
     } else {
       mutableBoardData.tasks = mutableBoardData.tasks.map(t => {
         if(t.title === currentTask.title){
-          return newTask
+          return task
         } else {
           return t
         }

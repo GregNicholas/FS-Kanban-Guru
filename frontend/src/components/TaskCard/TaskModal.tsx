@@ -25,17 +25,19 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   const [showEditTask, setShowEditTask] = useState(false)
   const [showDeleteWarning, setShowDeleteWarning] = useState(false)
   const [currentStatus, setCurrentStatus] = useState(task.status)
-  const subtasks = [...task.subtasks]
+
   const dispatch = useDispatch<AppDispatch>()
 
   const displayBoardIndex = useSelector((state: RootState) => state.board.value)
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
   const editableBoard = deepCopy(boards[displayBoardIndex])
+  const subtasks = [...task.subtasks]
+  const [subs, setSubs] = useState(editableBoard.tasks.filter(t => t.title === task.title)[0].subtasks)
+  // const [currentTask, setCurrentTask] = useState(task)
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCurrentStatus(e.target.value)
     const newTask = {...task, status: e.target.value}
-    console.log(newTask)
     editableBoard.tasks = editableBoard.tasks.map(task => {
       if(task.title === newTask.title){
         return newTask
@@ -48,12 +50,27 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   }
 
   const changeSubtaskStatus = (title: string) => {
-    const newSubtasks = subtasks.map(subtask => {
-      return subtask.title !== title ? subtask
-             : {...subtask, isCompleted: !subtask.isCompleted}
+    // const newSubtasks = subtasks.map(subtask => {
+    //   return subtask.title !== title ? subtask
+    //          : {...subtask, isCompleted: !subtask.isCompleted}
+    // })
+    // const newTask = {...task, subtasks: newSubtasks}
+    const updatedSubs = subs.map(subtask => {
+      return subtask.title !== title ? subtask : {...subtask, isCompleted: !subtask.isCompleted}
     })
-    const newTask = {...task, subtasks: newSubtasks}
-    // dispatch(editSubtasks({task: newTask, index: index, boardName: board.name, columnName: column}))
+
+    setSubs(updatedSubs)
+
+    const newTask = {...task, subtasks: updatedSubs}
+    console.log(newTask.subtasks)
+    editableBoard.tasks = editableBoard.tasks.map(task => {
+      if(task.title === newTask.title){
+        return newTask
+      } else {
+        return task
+      }
+    })
+    dispatch(updateBoard(editableBoard))
   }
 
   const handleDeleteWarning = () => {
@@ -103,7 +120,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
           <div className="flex flex-col mb-6">
             <h5 className="mb-4">Subtasks ({task.subtasks.filter(sub => sub.isCompleted).length} of {task.subtasks.length})</h5>
             <ul>
-              {subtasks.map(subtask => {
+              {subs.map(subtask => {
                 return <SubtaskItem 
                           key={subtask.title}
                           subtask={subtask} 

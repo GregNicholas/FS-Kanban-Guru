@@ -12,7 +12,6 @@ import { Board } from '../../types'
 type BoardFormProps = {
   setShowBoardForm: React.Dispatch<React.SetStateAction<boolean>>
   title: string
-  // boardIndex?: number | null
   currentBoard?: Board | null
 }
 
@@ -30,6 +29,7 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
 
   const changeColumnInput = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     let newTasks = [...board.tasks].map(task => {
+      // test if column that had tasks was deleted
       if(task.status === board.columns[index]){
         return {
           ...task,

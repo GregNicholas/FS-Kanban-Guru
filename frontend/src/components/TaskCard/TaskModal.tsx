@@ -5,7 +5,7 @@ import Select from '../Select'
 import EditModal from '../EditModal'
 import TaskForm from '../Forms/TaskForm'
 import DeleteWarning from '../DeleteWarning'
-import { RootState } from "../../app/store";
+import { AppDispatch, RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 // import { addTask, deleteTask, editSubtasks } from '../../features/boardsSlice'
@@ -25,14 +25,12 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   const [showDeleteWarning, setShowDeleteWarning] = useState(false)
   const subtasks = [...task.subtasks]
   const currentStatus = task.status
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
-  // const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-  const displayBoardIndex = 2
+  const displayBoardIndex = useSelector((state: RootState) => state.board.value)
   // const board = useSelector((state: RootState) => state.boards[displayBoardIndex])
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
-  // const displayBoard = boards[displayBoardIndex]
-  const displayBoard = boards[2]
+  const displayBoard = boards[displayBoardIndex]
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newTask = {...task, status: e.target.value}

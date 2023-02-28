@@ -4,8 +4,10 @@ import Select from '../Select'
 import Button from '../Button'
 import FormLabel from './FormLabel'
 import { useDispatch } from 'react-redux'
-// import { addTask, editTask, deleteTask } from '../../features/boardsSlice'
+import { updateBoard } from '../../features/boards/boardSlice'
 import { Task, Board } from '../../types'
+import { AppDispatch } from '../../app/store'
+import { deepCopy } from '../../utils/utils'
 
 type TaskFormProps = {
   title: string
@@ -20,7 +22,7 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
   const columns = [...board.columns]
   let columnName = column ? column : columns[0]
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const [task, setTask] = useState<Task>(currentTask 
                     ? {
@@ -66,19 +68,24 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const mutableBoardData = deepCopy(board)
     const newTask = {title: task.title, description: task.description, status: task.status, subtasks: [...task.subtasks]}
-    setShowTaskForm(false)
-    // if(!currentTask){
-    //   dispatch(addTask({task: newTask, boardName: board.name, columnName: columnName}))
-    // } else if(newTask.status === columnName) {
-    //     dispatch(editTask({prevTaskTitle: currentTask.title, task: newTask, boardName: board.name, columnName: columnName }))
-    // } else {
-    //   dispatch(deleteTask({taskTitle: currentTask.title, boardName: board.name, columnName: columnName }))
-    //   dispatch(addTask({task: newTask, boardName: board.name, columnName: columnName}))
-    // }
-    if(toggleTaskView !== null){
-      toggleTaskView()
+
+    if(!currentTask){
+      mutableBoardData.tasks.unshift(newTask)
+    } else {
+      mutableBoardData.tasks = mutableBoardData.tasks.map(t => {
+        if(t.title === currentTask.title){
+          return newTask
+        } else {
+          return t
+        }
+      })
     }
+
+    dispatch(updateBoard(mutableBoardData))
+    
+    setShowTaskForm(false)
   }
 
   return (

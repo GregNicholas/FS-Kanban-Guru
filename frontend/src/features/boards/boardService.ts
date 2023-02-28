@@ -29,14 +29,8 @@ const getBoards = async (token: string) => {
     return response.data
 }
 
-const deleteBoard = async (id: string, token: string) => {
-    const config = getConfig(token);
-    const response = await axios.delete(API_URL + id, config)
-    return response.data
-}
-
 const updateBoard = async (boardData: Board, token: string) => {
-    console.log("TO UPDATE BOARD: ", boardData._id)
+    console.log("TO UPDATE BOARD: ", boardData)
     const boardId = boardData._id;
     const data = boardData;
     const config = getConfig(token)
@@ -44,17 +38,11 @@ const updateBoard = async (boardData: Board, token: string) => {
     return response.data
 }
 
-// const updateGrocery = async (updateData, token) => {
-//     const groceryId = updateData[0]
-//     const data = updateData[1]
-//     const config = {
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         }
-//     }
-//     const response = await axios.put(API_URL + groceryId, data, config)
-//     return response.data
-// }
+const deleteBoard = async (id: string, token: string) => {
+    const config = getConfig(token);
+    const response = await axios.delete(API_URL + id, config)
+    return response.data
+}
 
 const boardService = {
     addBoard,

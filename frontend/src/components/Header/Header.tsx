@@ -113,7 +113,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
                         message={`Are you sure you want to delete the ‘${displayBoard?.name}’ board? This action will remove all columns and tasks and cannot be reversed.`}
                     />
                 }
-                {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" boardIndex={displayBoardIndex} currentBoard={displayBoard} />}
+                {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />}
             </div>
             <div className="sm:hidden">
             {showSidebar && 

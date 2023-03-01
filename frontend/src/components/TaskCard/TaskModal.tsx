@@ -50,11 +50,6 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   }
 
   const changeSubtaskStatus = (title: string) => {
-    // const newSubtasks = subtasks.map(subtask => {
-    //   return subtask.title !== title ? subtask
-    //          : {...subtask, isCompleted: !subtask.isCompleted}
-    // })
-    // const newTask = {...task, subtasks: newSubtasks}
     const updatedSubs = subs.map(subtask => {
       return subtask.title !== title ? subtask : {...subtask, isCompleted: !subtask.isCompleted}
     })
@@ -78,7 +73,8 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   }
 
   const handleDelete = () => {
-    // dispatch(deleteTask({taskTitle: task.title, boardName: board.name, columnName: column}))
+    editableBoard.tasks = editableBoard.tasks.filter(t => t._id !== task._id)
+    dispatch(updateBoard(editableBoard))
   }
   
   return (

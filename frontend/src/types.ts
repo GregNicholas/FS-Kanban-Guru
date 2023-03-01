@@ -1,11 +1,13 @@
 // import { Key } from "react";
 
 export interface Subtask {
+    _id: string;
     title: string;
     isCompleted: boolean;
 }
 
 export interface Task {
+    _id?: string;
     title: string;
     description: string;
     status: string;

@@ -11,11 +11,17 @@ interface LoginData {
     password: string
 }
 
-const API_BASE_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:2121'
-    : ''
+// const API_BASE_URL = process.env.NODE_ENV === 'development'
+//     ? 'http://localhost:2121'
+//     : ''
 
-const API_URL = `${API_BASE_URL}/api/users`
+if(process.env.NODE_ENV === 'development'){
+    axios.defaults.baseURL = `http://localhost:2121`
+}
+
+const API_URL = '/api/users/'
+
+// const API_URL = `${API_BASE_URL}/api/users`
 
 // Register user
 const register = async (userData: RegisterData) => {
@@ -32,7 +38,7 @@ const register = async (userData: RegisterData) => {
 // Login user
 const login = async (userData: LoginData) => {
     try {
-        const response = await axios.post(`${API_URL}/login`, userData)
+        const response = await axios.post(`${API_URL}login`, userData)
         localStorage.setItem('user', JSON.stringify(response.data))
         return response.data
     } catch (err) {

@@ -5,7 +5,7 @@ import { Board, Task, indexedBoard } from "../../types"
 // const API_URL = '/api/boards/'
 const API_BASE_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:2121'
-    : 'https://your-production-api-url.com'
+    : ''
 
 const API_URL = `${API_BASE_URL}/api/boards/`
 

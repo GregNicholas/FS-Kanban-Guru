@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
-const port = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080
 const cors = require('cors')
 
 connectDB()
@@ -21,4 +21,7 @@ app.use('/api/users', require('./routes/userRoutes'))
 app.use(errorHandler)
 
 
-app.listen(port, () => console.log(`server started on port ${port}`))
+// for cyclic hosting. make sure db is connected first, then listen
+connectDB().then(() => {
+    app.listen(PORT, () => console.log(`server started on PORT ${port}`))
+})

@@ -31,9 +31,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   const displayBoardIndex = useSelector((state: RootState) => state.board.value)
   const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
   const editableBoard = deepCopy(boards[displayBoardIndex])
-  const subtasks = [...task.subtasks]
   const [subs, setSubs] = useState(editableBoard.tasks.filter(t => t.title === task.title)[0].subtasks)
-  // const [currentTask, setCurrentTask] = useState(task)
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCurrentStatus(e.target.value)

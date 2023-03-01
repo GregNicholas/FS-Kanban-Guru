@@ -1,7 +1,7 @@
 // import { Key } from "react";
 
 export interface Subtask {
-    _id: string;
+    _id?: string;
     title: string;
     isCompleted: boolean;
 }

@@ -66,18 +66,18 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
             hideModal()
             setShowTaskForm(false)
         }} 
-            className="w-full h-16 sm:h-20 md:h-24 pl-6 pr-2 sm:pr-4 md:pr-6 flex items-center justify-between border-b border-l-lines bg-white dark:bg-d-gray dark:border-d-lines">
+            className="w-full md:min-h-[64px] h-fit py-4 pl-6 pr-2 sm:pr-4 md:pr-6 flex items-center justify-between border-b border-l-lines bg-white dark:bg-d-gray dark:border-d-lines">
             {!showSidebar && <h1><Logo isDarkMode={isDarkMode} showSidebar={showSidebar} /></h1> }
             <img className={`${showMobileLogo} absolute left-4 top-5 sm:left-7 sm:top-7 h-6 mb-14`} src={`/assets/logo-mobile.svg`} alt="kanban logo" />
             <div onClick={showBoardsListMobile} className={`flex items-center h-full md:pl-0 ${nameClasses}`}>
                 {!showSidebar && <div className="hidden sm:block w-px h-full mr-8 md:border-l md:border-l-lines md:dark:border-d-lines"></div>}
                 <h2 onClick={showBoardsListMobile} className={`font-bold font-sans cursor-default text-black dark:text-white text-center text-lg sm:text-xl md:text-2xl`}>{displayBoard?.name}</h2>
                 { !showSidebar 
-                    ? <img className="ml-2 sm:hidden" src={`/assets/icon-chevron-down.svg`} alt="chevron down"/>
-                    : <img className="ml-2 sm:hidden" src={`/assets/icon-chevron-up.svg`} alt="chevron down"/>
+                    ? <img className="mx-1 sm:hidden" src={`/assets/icon-chevron-down.svg`} alt="chevron down"/>
+                    : <img className="mx-1 sm:hidden" src={`/assets/icon-chevron-up.svg`} alt="chevron down"/>
                 }
             </div>
-            <div>
+            <div className="min-w-fit">
                 { displayBoard?.name  
                 ? <>
                     <span className="hidden md:inline"><Button text=" + Add New Task " onClick={toggleShowTaskForm} widthFull={false} /></span>

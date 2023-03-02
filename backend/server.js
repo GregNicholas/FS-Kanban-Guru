@@ -27,7 +27,8 @@ if(process.env.NODE_ENV === 'production') {
     app.get('/', (req, res) => res.send('Please set to production'))
 }
 
+app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 // for cyclic hosting. make sure db is connected first, then listen
-connectDB().then(() => {
-    app.listen(PORT, () => console.log(`server started on PORT ${PORT}`))
-})
+// connectDB().then(() => {
+//     app.listen(PORT, () => console.log(`server started on PORT ${PORT}`))
+// })

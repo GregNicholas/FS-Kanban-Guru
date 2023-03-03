@@ -15,7 +15,7 @@ const BoardColumn = ({ index, columns, column, tasks }:ColumnProps) => {
   return (
     <div className="w-70 text-m-gray font-bold">
       <div className="uppercase text-xs mb-6 flex">
-        <div className={`w-[15px] h-[15px] mr-3 rounded-full ${colColor}`}></div>
+        <div className={`w-[15px] min-w-[15] h-[15px] mr-3 rounded-full ${colColor}`}></div>
         <span className="tracking-widest">{column} ({columnTasks.length})</span>
       </div>
       {columnTasks.length > 0 &&

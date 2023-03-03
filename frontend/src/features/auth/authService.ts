@@ -15,11 +15,12 @@ interface LoginData {
 //     ? 'http://localhost:2121'
 //     : ''
 
-// if(process.env.NODE_ENV === 'development'){
-//     axios.defaults.baseURL = `http://localhost:2121`
-// }
+if(process.env.NODE_ENV === 'development'){
+    axios.defaults.baseURL = `http://localhost:2121`
+}
 
 const API_URL = '/api/users/'
+console.log(API_URL)
 
 // const API_URL = `${API_BASE_URL}/api/users`
 

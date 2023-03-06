@@ -19,7 +19,7 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
   const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns, tasks: currentBoard.tasks, _id: currentBoard._id} 
                             : {
                                 name: "",
-                                columns: ["todo", "doing"],
+                                columns: ["planning", "in progress"],
                                 tasks: []
                             })
 

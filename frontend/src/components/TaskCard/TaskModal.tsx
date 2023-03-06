@@ -93,12 +93,13 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
             }
           }
         >
-          <div className="flex mb-6 justify-between gap-6 relative">
+          <div onClick={() => { if(showModal) setShowModal(false)}}
+               className="flex mb-6 justify-between gap-6 relative">
             <h3 className="text-lg text-black dark:text-white">{task.title}</h3> 
-            <div className="w-10 px-2 py-2.5 rounded-full inline-block text-center cursor-pointer hover:bg-l-gray dark:hover:bg-v-dark-gray">
+            <div onClick={() => setShowModal(prev => !prev)} 
+                 className="w-10 px-2 py-2.5 rounded-full inline-block text-center cursor-pointer hover:bg-l-gray dark:hover:bg-v-dark-gray">
               <img 
                   className="h-5 px-0.5 inline cursor-pointer" 
-                  onClick={() => setShowModal(prev => !prev)}
                   src={`/assets/icon-vertical-ellipsis.svg`} 
                   alt="board options" 
               />

@@ -69,6 +69,9 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if(toggleTaskView){
+      toggleTaskView()
+    }
 
     if(!currentTask){
       mutableBoardData.tasks.unshift(task)

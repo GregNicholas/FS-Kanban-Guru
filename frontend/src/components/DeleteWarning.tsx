@@ -14,7 +14,7 @@ const DeleteWarning = ({ closeModal, handleDelete, title, message }: DeleteWarni
 
   return (
     <ModalContainer>
-        <div className="w-120 max-w-[95%] p-8 text-[13px] font-normal bg-white dark:bg-v-dark-gray rounded-lg cursor-default">
+        <div className="z-50 w-120 max-w-[95%] p-8 text-[13px] font-normal bg-white dark:bg-v-dark-gray rounded-lg cursor-default">
         <h3 className="text-red text-lg font-bold mb-6">{title}</h3>
         <p className="mb-6">
           {message}
@@ -24,13 +24,12 @@ const DeleteWarning = ({ closeModal, handleDelete, title, message }: DeleteWarni
             text="Delete" 
             customStyle={confirmDeleteStyle} 
             onClick={() => {
-              handleDelete() 
+              handleDelete()
               closeModal(true)
             }} 
           />
           <Button text="Cancel" customStyle={cancelDeleteStyle} onClick={closeModal} />
         </div>
-        
     </div>
     </ModalContainer>
   )

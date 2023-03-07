@@ -132,7 +132,7 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
                            aria-label="new subtask"
                            required
                     /> 
-                    <button className="text-2xl font-bold" onClick={(e)=> removeSubtask(index, e)}>x</button>
+                    <button type="button" className="text-2xl font-bold" onClick={(e)=> removeSubtask(index, e)}>x</button>
                     </div>
                   )
               })

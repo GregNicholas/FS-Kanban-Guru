@@ -5,7 +5,7 @@ type AuthenticationProps = {
 const Authentication = ({children}: AuthenticationProps) => {
   return (
     <>
-    <section className="flex max-w-4xl max-h-full m-auto bg-main-purple">
+    <section className="flex max-w-4xl max-h-full mx-auto py-10">
         <section className="flex-[1_1.1_0%] relative bg-cover z-10 text-main-purple bg-[url('/assets/woods_background.jpg')]">
             <div className="absolute top-1/4 flex justify-center items-center text-4xl font-bold text-shadow shadow-white gap-1 w-full h-32 bg-white/[.6]">
             <img className="drop-shadow-lg" src="../assets/logo-dark.svg" />
@@ -24,7 +24,7 @@ const Authentication = ({children}: AuthenticationProps) => {
             </p>
             <p className="mt-5">Let's get started <span className="italic">now</span>.</p>
             </div>
-            <div className="w-full bg-white h-64 pt-4 pr-10 pb-7 pl-10">
+            <div className="w-full bg-white h-fit pt-4 pr-10 pb-7 pl-10">
                 {children}
             </div>
             <div id="message" className="hidden">

@@ -29,7 +29,7 @@ if(process.env.NODE_ENV === 'production') {
 app.use(errorHandler)
 
 connectDB().then(() => {
-    app.listen(PORT, () => console.log(`server started on port ${8080}`))
+    app.listen(PORT, () => console.log(`server started on port ${PORT}`))
 })
 // for cyclic hosting. make sure db is connected first, then listen
 // connectDB().then(() => {

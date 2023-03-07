@@ -60,7 +60,7 @@ const RegisterForm = () => {
     }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
-  const inputStyle = "w-50 h-7 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
+  const inputStyle = "w-full h-10 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
 
   if(isLoading) {
     return <Loader />
@@ -70,7 +70,7 @@ const RegisterForm = () => {
     <>
     <form onSubmit={onSubmit}>
       <h2 className="text-2xl font-bold mb-4">Create an account!</h2>
-      <div className="flex flex-wrap gap-x-10 gap-y-4 max-w-[40rem] inline-block">
+      <div className="flex flex-col flex-wrap gap-x-10 gap-y-4 max-w-[40rem] inline-block">
       <div className='form-group'>
         <label className={labelStyle} htmlFor="name">name</label>
         <input

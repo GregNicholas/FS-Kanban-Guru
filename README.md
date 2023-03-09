@@ -16,6 +16,7 @@ I built this app from figma designs from the [Kanban task management web app cha
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Things to add](#things-to-add)
+- [Run Locally](#run-local)
 - [Author](#author)
 
 ## Overview
@@ -67,6 +68,29 @@ I learned a lot while building this project! I wanted to take on a challenging p
 
 ### Things to add
 When I get some time, I could create a system to give other users permissions to collaborate on a board, and possibly allow the leader to assign various tasks to different users.
+
+## Run Local
+Clone to local machine
+Add .env and add your MONGO_URI
+NODE_ENV = development
+PORT = <your chosen port>
+
+### Install dependencies
+
+```
+# Backend deps
+npm install
+
+# Frontend deps
+cd frontend
+npm install
+```
+
+### Run backend and frontend concurrently
+
+```
+npm run dev
+```
 
 ## Author
 

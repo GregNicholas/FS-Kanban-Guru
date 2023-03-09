@@ -33,7 +33,7 @@ const Sidebar = (
         }
 
         const mobileClass = !isMobile ? "hidden sm:flex sm:flex-col lg:w-[300px] h-screen pt-8" 
-                : "absolute flex flex-col sm:hidden top-20 left-1/2 translate-x-[-50%] z-10 bg-white rounded-lg pt-4 max-h-[80%]"
+                : "absolute flex flex-col sm:hidden top-20 left-1/2 translate-x-[-50%] z-10 bg-white rounded-lg pt-4  min-h-[70%] max-h-[80%]"
 
         return (
             <section className={`${!showSidebar && "sm:hidden"} ${mobileClass} w-[261px] justify-between border-r border-l-lines dark:bg-d-gray dark:border-d-lines overflow-scroll`}>

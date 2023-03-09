@@ -91,12 +91,21 @@ const LoginForm = () => {
         <Button type="submit" text="Login" primary={true} />
       </div>
     </form>
-    
-        <p className="text-main-purple mt-4 text-sm">
-            Need an account? <Link className="underline" to='/register'>
-                Register
-            </Link>
-        </p>
+    <div className="flex flex-col md:flex-row md:justify-between gap-x-2 items-center">
+      <p className="text-main-purple mt-4 text-sm inline-block">
+          Need an account?<Link className="underline ml-2" to='/register'>
+              Register
+          </Link>
+      </p>
+      <p className="text-main-purple mt-4 text-sm inline-block">
+        Want a testdrive? 
+        <a className="underline font-bold text-lg ml-2 text-red cursor-pointer" 
+            onClick={() => dispatch(login({email: "demo@demo.com", password: "secret"}))}
+        >
+          Demo Login
+        </a>
+      </p>
+    </div>
     </>
   )
 }

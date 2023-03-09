@@ -5,7 +5,7 @@ import {toast} from 'react-toastify'
 import { Link } from 'react-router-dom'
 import Button from '../Button'
 import Loader from '../../components/Loader'
-import {register, reset} from '../../features/auth/authSlice'
+import { login, register, reset } from '../../features/auth/authSlice'
 import { AppDispatch } from '../../app/store'
 
 const RegisterForm = () => {
@@ -128,12 +128,21 @@ const RegisterForm = () => {
         <Button type="submit" text="Create Account" primary={true} />
       </div>
     </form>
-    
-        <p className="text-main-purple mt-4 text-sm">
-            Already have an account? <Link className="underline" to='/login'>
-                Login
-            </Link>
-        </p>
+    <div className="flex flex-col md:flex-row md:justify-between gap-x-2 items-center">
+      <p className="text-main-purple mt-4 text-sm">
+          Already have an account? <Link className="underline" to='/login'>
+              Login
+          </Link>
+      </p>
+      <p className="text-main-purple mt-4 text-sm inline-block">
+        Want a testdrive? 
+        <a className="underline font-bold text-lg ml-2 text-red cursor-pointer" 
+            onClick={() => dispatch(login({email: "demo@demo.com", password: "secret"}))}
+        >
+          Demo Login
+        </a>
+      </p>
+    </div>
     </>
   )
 }

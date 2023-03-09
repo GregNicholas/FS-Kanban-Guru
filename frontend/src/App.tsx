@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="bg-main-purple-hover">
+    <div className="h-full">
       <Router>
           <Routes>
             <Route path='/' element={<Dashboard />} />

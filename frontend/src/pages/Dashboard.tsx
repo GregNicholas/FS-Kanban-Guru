@@ -37,13 +37,13 @@ function Dashboard() {
   }, [user, dispatch])
  
   return (
-    <div className={`flex h-full ${isDarkMode && "dark"}`}>
+    <div className={`flex h-fit ${isDarkMode && "dark"}`}>
       {isLoading && <Loader />}
       <Sidebar 
           isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
           showSidebar={showSidebar} setShowSidebar={setShowSidebar} 
       />
-      <div className="flex flex-col flex-1 overflow-auto" tabIndex={0}>
+      <div className="flex flex-col flex-1 overflow-auto h-screen" tabIndex={0}>
         <Header 
             isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} 
             showSidebar={showSidebar} setShowSidebar={setShowSidebar} 

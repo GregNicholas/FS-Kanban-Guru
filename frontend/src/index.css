@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 #root {
-    height: 100vh;
-    background-color: #A8A4FF;
+    height: 100%;
+}
+
+html, body {
+    height: 50%;
+    min-height: 100%;
 }

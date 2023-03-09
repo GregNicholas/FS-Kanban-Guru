@@ -5,8 +5,8 @@ type AuthenticationProps = {
 const Authentication = ({children}: AuthenticationProps) => {
   return (
     <>
-    <section className="flex max-w-4xl max-h-full mx-auto py-10">
-        <section className="flex-[1_1.1_0%] relative bg-cover z-10 text-main-purple bg-[url('/assets/woods_background.jpg')]">
+    <section className="flex flex-col md:flex-row max-w-4xl h-full max-h-[600px] mx-auto md:my-10 shadow-lg">
+        <section className="flex-none md:flex-[1_1.1_0%] h-80 md:h-full relative bg-cover z-10 text-main-purple bg-[url('/assets/woods_background.jpg')]">
             <div className="absolute top-1/4 flex justify-center items-center text-4xl font-bold text-shadow shadow-white gap-1 w-full h-32 bg-white/[.6]">
             <img className="drop-shadow-lg" src="../assets/logo-dark.svg" />
             </div>
@@ -16,13 +16,13 @@ const Authentication = ({children}: AuthenticationProps) => {
             <a href="https://unsplash.com/">Unsplash</a>
             </p>
         </section>
-        <section className="relative flex-[2_1_0%] text-main-purple bg-l-gray">
-            <div className="px-10 pt-12 pb-8 font-bold text-base leading-snug">
+        <section className="relative md:flex-[2_1_0%] text-main-purple bg-l-gray">
+            <div className="px-10 pt-6 pb-4 font-bold text-base leading-snug">
             <p>
-                Access all the benefits of your very own kanban boards!
+                Access the benefits of your very own kanban boards!
                 Kanban Guru will turn all of your projects into manageable tasks.
             </p>
-            <p className="mt-5">Let's get started <span className="italic">now</span>.</p>
+            <p className="mt-3">Let's get started <span className="italic">now</span>.</p>
             </div>
             <div className="w-full bg-white h-fit pt-4 pr-10 pb-7 pl-10">
                 {children}

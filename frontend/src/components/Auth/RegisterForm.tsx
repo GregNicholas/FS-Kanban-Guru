@@ -60,7 +60,7 @@ const RegisterForm = () => {
     }
 
   const labelStyle = "uppercase block text-xs font-bold tracking-wider mb-1"
-  const inputStyle = "w-full h-10 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
+  const inputStyle = "w-full h-8 border border-l-lines rounded-md p-1 focus:outline-main-purple focus:invalid:outline-red"
 
   if(isLoading) {
     return <Loader />

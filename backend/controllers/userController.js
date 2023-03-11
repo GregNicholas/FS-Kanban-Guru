@@ -50,7 +50,6 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/login
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
-    console.log("touched login controller")
     const {email, password} = req.body
 
     if(!email || !password){

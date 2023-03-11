@@ -2,7 +2,7 @@
 
 ### Links
 
-- Live Site URL: [Kanban Guru](https://kanban-guru.fly.dev/) (https://kanban-guru.fly.dev/)
+- Live Site URL: [Kanban Guru](https://gs-kanban-guru.cyclic.app/) (https://gs-kanban-guru.cyclic.app/)
 
 I built this app from figma designs from the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). My focus was originally frontend, along with function with state. I revisited the app and built a backend so that I can use it on a daily basis to manage my projects.
 

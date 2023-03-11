@@ -29,7 +29,6 @@ const getBoards = async (token: string) => {
 }
 
 const updateBoard = async (boardData: Board, token: string) => {
-    console.log("TO UPDATE BOARD: ", boardData)
     const boardId = boardData._id;
     const data = boardData;
     const config = getConfig(token)

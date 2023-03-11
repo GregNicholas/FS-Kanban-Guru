@@ -7,7 +7,6 @@ const User = require('../models/userModel')
 // @route GET /api/boards
 // @access Private
 const getBoards = asyncHandler(async (req, res) => {
-    console.log("getting boards ROUTE")
     const boards = await Board.find({ user: req.user.id})
 
     res.status(200).json(boards)
@@ -29,28 +28,6 @@ const createBoard = asyncHandler(async (req, res) => {
         tasks: req.body.tasks || []
     })
 
-    // const board = await Board.create({
-    //     user: req.user.id,
-    //     name: "Gman's third(for real) board",
-    //     columns: ["Column Yi", "Column er"],
-    //     tasks: [
-    //         {
-    //             title: "first task here",
-    //             description: "task description",
-    //             subtasks: [
-    //                 {
-    //                     title: "round it out",
-    //                 },
-    //                 {
-    //                     title: "go for it",
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             title: "second task on the board"
-    //         }
-    //     ]
-    // })
     res.status(200).json(board)
 })
 
@@ -58,7 +35,6 @@ const createBoard = asyncHandler(async (req, res) => {
 // @route PUT /api/boards/:id
 // @access Private
 const updateBoard = asyncHandler(async (req, res) => {
-    console.log("update Board ROUTE")
     const board = await Board.findById(req.params.id)
 
     if(!board) {

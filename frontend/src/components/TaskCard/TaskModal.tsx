@@ -55,7 +55,6 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
     setSubs(updatedSubs)
 
     const newTask = {...task, subtasks: updatedSubs}
-    console.log(newTask.subtasks)
     editableBoard.tasks = editableBoard.tasks.map(task => {
       if(task.title === newTask.title){
         return newTask

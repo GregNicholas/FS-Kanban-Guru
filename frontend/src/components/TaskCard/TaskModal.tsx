@@ -131,7 +131,6 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
               columns={columns} 
             />
           </div>
-          
         </div>
       }
         

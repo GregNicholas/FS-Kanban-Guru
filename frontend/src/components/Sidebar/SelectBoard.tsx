@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const SelectBoard = () => {
   const [ showBoardForm, setShowBoardForm ] = useState(false)
-  const {boards: boardsData, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
+  const {boards: boardsData} = useSelector((state: RootState) => state.boards)
   const {user} = useSelector((state: RootState) => state.auth)
   const userName: string = user?.name ? user.name : "User"
 

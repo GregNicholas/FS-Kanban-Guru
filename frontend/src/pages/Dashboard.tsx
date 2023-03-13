@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header/Header'
 import Sidebar from '../components/Sidebar/Sidebar'
 import BoardArea from '../components/BoardArea/BoardArea'
@@ -7,7 +7,6 @@ import { AppDispatch, RootState } from "../app/store"
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getBoards, reset } from '../features/boards/boardSlice'
-import BoardForm from '../components/Forms/BoardForm'
 import Loader from '../components/Loader'
 
 function Dashboard() {
@@ -17,7 +16,7 @@ function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const {user} = useSelector((state: RootState) => state.auth)
-  const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
+  const {isLoading, isError, message} = useSelector((state: RootState) => state.boards)
 
   if(isError){
     console.log(message)

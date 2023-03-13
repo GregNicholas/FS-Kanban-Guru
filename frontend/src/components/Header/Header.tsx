@@ -27,7 +27,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
     const [showBoardForm, setShowBoardForm] = useState(false)
 
     const displayBoardIndex = useSelector((state: RootState) => state.board.value)
-    const {boards, isLoading, isError, message} = useSelector((state: RootState) => state.boards)
+    const {boards} = useSelector((state: RootState) => state.boards)
     const displayBoard = boards[displayBoardIndex]
     
     const dispatch = useDispatch<AppDispatch>()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ModalContainer from '../ModalContainer'
 import Button from '../Button'
-import { AppDispatch, RootState } from "../../app/store";
+import { AppDispatch } from "../../app/store";
 import { useDispatch } from 'react-redux'
 import { addBoard, updateBoard } from '../../features/boards/boardSlice'
 import { Board } from '../../types'
@@ -19,7 +19,6 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
                                 columns: ["planning", "in progress"],
                                 tasks: []
                             })
-  const [showDeleteWarning, setShowDeleteWarning] = useState<boolean>(true)
 
   const dispatch = useDispatch<AppDispatch>()
 

@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Dark Mode](./public/assets/kanbanguru-screenshot.png)
+![Dark Mode](./frontend/public/assets/kanbanguru-screenshot.png)
 
 ## My process
 
@@ -95,10 +95,3 @@ npm run dev
 ## Author
 
 - Website - [Greg Schoenberg](https://gregschoenberg.com)
-
-
-
-
-
-export FLYCTL_INSTALL="/home/gregschoenberg/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"

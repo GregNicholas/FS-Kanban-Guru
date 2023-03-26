@@ -84,7 +84,7 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
   return (
     <ModalContainer closeModal={setShowBoardForm}>
         <div 
-          className="z-10 opacity-100 w-120 p-8 bg-white dark:bg-d-gray rounded-lg"
+          className="z-10 opacity-100 w-120 max-h-[95vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <form onSubmit={handleSubmit}>

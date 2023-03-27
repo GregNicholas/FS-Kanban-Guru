@@ -5,14 +5,16 @@ import { AppDispatch } from "../../app/store";
 import { useDispatch } from 'react-redux'
 import { addBoard, updateBoard } from '../../features/boards/boardSlice'
 import { Board } from '../../types'
+import { Transition } from '@headlessui/react';
 
 type BoardFormProps = {
   setShowBoardForm: React.Dispatch<React.SetStateAction<boolean>>
+  showBoardForm: boolean
   title: string
   currentBoard?: Board | null
 }
 
-const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps) => {
+const BoardForm = ({ setShowBoardForm, showBoardForm, title, currentBoard=null }:BoardFormProps) => {
   const [board, setBoard] = useState<Board>(currentBoard ? {name: currentBoard.name, columns: currentBoard.columns, tasks: currentBoard.tasks, _id: currentBoard._id} 
                             : {
                                 name: "",
@@ -83,6 +85,16 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
 
   return (
     <ModalContainer closeModal={setShowBoardForm}>
+      <Transition
+        show={showBoardForm}
+        appear={true}
+        enter="transition-all duration-300"
+        enterFrom="translate-y-full text-black"
+        enterTo="translate-y-0 text-red-500"
+        leave="transition-all duration-300"
+        leaveFrom="translate-y-0"
+        leaveTo="-translate-y-full"
+      >
         <div 
           className="z-10 opacity-100 w-120 max-h-[95vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg"
           onClick={(e) => e.stopPropagation()}
@@ -129,6 +141,7 @@ const BoardForm = ({ setShowBoardForm, title, currentBoard=null }:BoardFormProps
             <Button type="submit" text={title === "Add New Board" ? "Create New Board" : "Save Changes"} />
           </form>
         </div>
+        </Transition>
     </ModalContainer>
   )
 }

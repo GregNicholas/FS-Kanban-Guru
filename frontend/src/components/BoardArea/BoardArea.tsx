@@ -43,18 +43,18 @@ return (
             <NewColumn addColumn={addColumn} />
           </div>
         }
-        {/* {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />} */}
+ {/* conditionally rendering the board form with headlessui transition */}
         <Transition
-        show={showBoardForm}
-        enter="transition-all duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-all duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />
-      </Transition>
+          show={showBoardForm}
+          enter="transition-all duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-all duration-300"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <BoardForm setShowBoardForm={setShowBoardForm} showBoardForm={showBoardForm} title="Edit Board" currentBoard={displayBoard} />
+        </Transition>
     </main>
   )
 }

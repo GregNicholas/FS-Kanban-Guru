@@ -6,6 +6,7 @@ import BoardForm from '../Forms/BoardForm'
 import { RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { Board } from '../../types'
+import { Transition } from '@headlessui/react'
 
 const BoardArea = () => {
   const [showBoardForm, setShowBoardForm] = useState(false)
@@ -22,7 +23,7 @@ const BoardArea = () => {
 const columns:string[] = displayBoard?.columns
 
 return (
-    <main className="flex-1 bg-l-gray dark:bg-v-dark-gray overflow-auto" tabIndex={0}>
+    <main className="flex-1 bg-l-gray dark:bg-v-dark-gray overflow-auto transition-all" tabIndex={0}>
         { 
           (displayBoard?.name === "") || !displayBoard ? 
           <div className="text-center relative top-1/3 font-bold">
@@ -42,7 +43,18 @@ return (
             <NewColumn addColumn={addColumn} />
           </div>
         }
-        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />}
+        {/* {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />} */}
+        <Transition
+        show={showBoardForm}
+        enter="transition-all duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-all duration-150"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />
+      </Transition>
     </main>
   )
 }

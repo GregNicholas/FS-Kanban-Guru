@@ -66,7 +66,7 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
             hideModal()
             setShowTaskForm(false)
         }} 
-            className="w-full md:min-h-[64px] h-fit py-4 pl-6 pr-2 sm:pr-4 md:pr-6 flex items-center justify-between border-b border-l-lines bg-white dark:bg-d-gray dark:border-d-lines">
+            className="w-full min-h-[72px] h-fit py-4 pl-6 pr-2 sm:pr-4 md:pr-6 flex items-center justify-between border-b border-l-lines bg-white dark:bg-d-gray dark:border-d-lines transition-all">
             {!showSidebar && <h1><Logo isDarkMode={isDarkMode} showSidebar={showSidebar} /></h1> }
             <img className={`${showMobileLogo} absolute left-4 top-5 sm:left-7 sm:top-7 h-6 mb-14`} src={`/assets/logo-mobile.svg`} alt="kanban logo" />
             <div onClick={showBoardsListMobile} className={`flex items-center h-full md:pl-0 ${nameClasses}`}>

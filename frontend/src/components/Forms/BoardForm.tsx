@@ -89,14 +89,13 @@ const BoardForm = ({ setShowBoardForm, showBoardForm, title, currentBoard=null }
         show={showBoardForm}
         appear={true}
         enter="transition-all duration-300"
-        enterFrom="translate-y-full text-black"
-        enterTo="translate-y-0 text-red-500"
+        enterFrom="translate-y-full"
+        enterTo="translate-y-0 z-10 opacity-100 w-120 max-h-[95vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg"
         leave="transition-all duration-300"
         leaveFrom="translate-y-0"
         leaveTo="-translate-y-full"
       >
         <div 
-          className="z-10 opacity-100 w-120 max-h-[95vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <form onSubmit={handleSubmit}>

@@ -77,7 +77,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
   return (
     <ModalContainer>
       {
-        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={editableBoard} column={column} setShowTaskForm={setShowEditTask} toggleTaskView={toggleTaskView}/>
+        showEditTask ? <TaskForm title="Edit Task" currentTask={task} board={editableBoard} column={column} setShowTaskForm={setShowEditTask} showTaskForm={showEditTask} toggleTaskView={toggleTaskView}/>
         : showDeleteWarning 
         ? <DeleteWarning 
             closeModal={() => setShowDeleteWarning(false)} 

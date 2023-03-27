@@ -12,6 +12,7 @@ import { AppDispatch, RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { deleteBoard } from '../../features/boards/boardSlice'
 import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
+import { Transition } from '@headlessui/react'
 
 type HeaderProps = {
     isDarkMode: boolean
@@ -98,7 +99,17 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
                     </div>
                   </>
                 : null }
-                {showTaskForm && <TaskForm setShowTaskForm={setShowTaskForm} board={displayBoard} title="Add New Task" />}
+                <Transition
+                    show={showTaskForm}
+                    enter="transition-all duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="transition-all duration-300"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <TaskForm setShowTaskForm={setShowTaskForm} showTaskForm={showTaskForm} board={displayBoard} title="Add New Task" />
+                </Transition>
                 {showModal && <EditModal 
                                 editText="Edit Board" 
                                 deleteText="Delete Board"
@@ -113,7 +124,17 @@ const Header = ({ isDarkMode, setIsDarkMode, showSidebar, setShowSidebar }:Heade
                         message={`Are you sure you want to delete the ‘${displayBoard?.name}’ board? This action will remove all columns and tasks and cannot be reversed.`}
                     />
                 }
-                {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Edit Board" currentBoard={displayBoard} />}
+                <Transition
+                    show={showBoardForm}
+                    enter="transition-all duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="transition-all duration-300"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <BoardForm setShowBoardForm={setShowBoardForm} showBoardForm={showBoardForm} title="Edit Board" currentBoard={displayBoard} />
+                </Transition>
             </div>
             <div className="sm:hidden">
             {showSidebar && 

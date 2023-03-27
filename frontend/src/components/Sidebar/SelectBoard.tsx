@@ -3,6 +3,7 @@ import SelectBoardTitle from "./SelectBoardTitle"
 import BoardForm from '../Forms/BoardForm'
 import { RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
+import { Transition } from '@headlessui/react';
 
 const SelectBoard = () => {
   const [ showBoardForm, setShowBoardForm ] = useState(false)
@@ -33,7 +34,17 @@ const SelectBoard = () => {
                 + Create New Board
             </li>
         </ul>}
-        {showBoardForm && <BoardForm setShowBoardForm={setShowBoardForm} title="Add New Board" />}
+        <Transition
+          show={showBoardForm}
+          enter="transition-all duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-all duration-300"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <BoardForm setShowBoardForm={setShowBoardForm} showBoardForm={showBoardForm} title="Add New Board" />
+        </Transition>
     </section>
   )
 }

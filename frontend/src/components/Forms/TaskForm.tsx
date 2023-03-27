@@ -8,6 +8,7 @@ import { updateBoard } from '../../features/boards/boardSlice'
 import { Task, Board } from '../../types'
 import { AppDispatch } from '../../app/store'
 import { deepCopy } from '../../utils/utils'
+import { Transition } from '@headlessui/react'
 
 type TaskFormProps = {
   title: string
@@ -15,10 +16,11 @@ type TaskFormProps = {
   board: Board
   column?: string 
   setShowTaskForm: React.Dispatch<React.SetStateAction<boolean>>
+  showTaskForm: boolean
   toggleTaskView?: (() => void) | null
 }
 
-const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, toggleTaskView=null }:TaskFormProps) => {
+const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, showTaskForm, toggleTaskView=null }:TaskFormProps) => {
   const columns = [...board.columns]
   let columnName = column ? column : columns[0]
   const mutableBoardData = deepCopy(board)
@@ -92,8 +94,17 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
 
   return (
     <ModalContainer>
+      <Transition
+        show={showTaskForm}
+        appear={true}
+        enter="transition-all duration-300"
+        enterFrom="translate-y-full"
+        enterTo="translate-y-0 z-10 opacity-100 max-h-[95vh] overflow-scroll w-120 p-8 bg-white dark:bg-d-gray rounded-lg"
+        leave="transition-all duration-300"
+        leaveFrom="translate-y-0"
+        leaveTo="-translate-y-full"
+      >
         <div 
-          className="z-10 opacity-100 w-120 p-8 bg-white dark:bg-d-gray rounded-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <form onSubmit={handleSubmit}>
@@ -154,6 +165,7 @@ const TaskForm = ({ title, currentTask=null, board, column, setShowTaskForm, tog
             </div>
           </form>
         </div>
+      </Transition>
     </ModalContainer>
   )
 }

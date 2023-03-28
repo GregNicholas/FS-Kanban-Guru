@@ -4,7 +4,7 @@
 
 - Live Site URL: [Kanban Guru](https://gs-kanban-guru.cyclic.app/) (https://gs-kanban-guru.cyclic.app/)
 
-I built this app from figma designs from the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). My focus was originally frontend, along with function with state. I revisited the app and built a backend so that I can use it on a daily basis to manage my projects.
+I built this app from scratch to fit the figma designs from the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). My focus was originally frontend, along with function with state. I revisited the app and built a backend so that I can use it on a daily basis to manage my projects.
 
 ## Table of contents
 
@@ -56,14 +56,15 @@ Users should be able to:
 
 ### What I learned
 
-I learned a lot while building this project! I wanted to take on a challenging project and build it from scratch. I used this project as an opportunity to strengthen some skills:
+I learned a lot while building this project! I wanted to take on a challenging project and build it from the ground up. I used this project as an opportunity to strengthen some skills:
 
-- I used TypeScript, which I had only made smaller projects with before. When I first used TypeScript, it seemed a bit tedious, but the more I work with it, the more I have been able to see benefits that lead to a better developer experience.
+- Developed with React and TypeScript, which I had only made smaller projects with before. When I first used TypeScript, it seemed a bit tedious, but the more I work with it, the more I have been able to see benefits that lead to a better developer experience, fewer errors and easier debugging.
 - I learned and used Redux for the first time. During the original frontend process, I took a break and worked on a small demo app on the side to learn redux and redux toolkit.
 - I was going to use React Context for state, which I had used before, but as I was thinking out how to put it together, I thought, this would be the perfect time to learn Redux. So I went ahead and built out the structure and style, then dove into Redux.
 - I used tailwind for the first time while building this.
 - After I had the frontend complete, I worked on some other projects that included backends. Comfortable with that, I decided to use MongoDB as it would be simple and efficient for this app. It was an interesting challenge with a more complex data model with a Board consisting of its name and identifying attributes, columns, task objects, and subtask objects inside the tasks.
 - I added JWT Authentication so that users can create and save private boards.
+- Used @headlessui/react which works well with Tailwind, to animate the conditionally rendered forms.
 - to be continued...
 
 ### Things to add

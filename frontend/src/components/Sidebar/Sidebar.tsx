@@ -51,7 +51,7 @@ const Sidebar = (
                             alt="hide sidebar" />
                         Hide Sidebar
                     </div>}
-                    <a className="flex items-center mx-auto my-2 px-2 w-fit cursor-pointer transition duration-300 hover:text-main-purple hover:dark:text-white" onClick={handleLogout}>
+                    <a className="flex dark:text-white items-center mx-auto my-2 px-2 w-fit cursor-pointer transition duration-300 hover:text-main-purple hover:dark:text-main-purple" onClick={handleLogout}>
                     <span className="pr-2">Logout</span><FaSignOutAlt/> 
                     </a>
                 </div>

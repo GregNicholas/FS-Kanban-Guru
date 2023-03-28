@@ -9,7 +9,7 @@ type DarkMode = {
 const DarkModeSelect = ({ isDarkMode, setIsDarkMode }:DarkMode) => {
 
   return (
-    <div className="flex justify-center gap-6 mx-4 lg:mx-6 items-center w-auto h-12 mb-4 rounded-md bg-l-gray dark:bg-v-dark-gray">
+    <div className="transition-all flex justify-center gap-6 mx-4 lg:mx-6 items-center w-auto h-12 mb-4 rounded-md bg-l-gray dark:bg-v-dark-gray">
         <img className="h-5 inline dark:cursor-pointer" src={`/assets/icon-light-theme.svg`} 
              onClick={() => setIsDarkMode(false)}
              alt="light toggle" 

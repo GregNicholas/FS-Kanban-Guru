@@ -9,7 +9,7 @@ const Toggle = ( {isDarkMode, setIsDarkMode}:DarkMode) => {
   const darkClass = 'transform translate-x-4';
 
   return (
-    <div className="inline-flex p-x-12 w-10 h-5  items-center bg-main-purple rounded-full p-1 cursor-pointer"
+    <div className="inline-flex p-x-12 w-10 h-5 items-center bg-main-purple rounded-full p-1 cursor-pointer"
             onClick={() => setIsDarkMode(prev => !prev)}
         >
             <div className =  

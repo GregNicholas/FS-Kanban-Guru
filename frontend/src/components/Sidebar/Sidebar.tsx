@@ -36,10 +36,10 @@ const Sidebar = (
                 : "absolute flex flex-col sm:hidden top-20 left-1/2 translate-x-[-50%] z-10 bg-white rounded-lg pt-4  min-h-[70%] max-h-[80%]"
 
         return (
-            <section className={`${!showSidebar && "sm:hidden"} ${mobileClass} transition-all w-[261px] justify-between border-r border-l-lines dark:bg-d-gray dark:border-d-lines overflow-scroll`}>
+            <section className={`${!showSidebar && "sm:hidden"} ${mobileClass} transition-all w-[261px] justify-between border-r border-l-lines dark:bg-d-gray dark:border-d-lines overflow-auto`}>
                 <div>
                     <Logo isDarkMode={isDarkMode} showSidebar={showSidebar} />
-                    <SelectBoard />
+                    <SelectBoard closeSidebar={() => setShowSidebar(false)}/>
                 </div>
                 <div className={`${isMobile ? "mb-0" : "mb-11"}`}>
                     <DarkModeSelect isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />

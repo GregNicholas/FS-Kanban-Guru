@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import ModalContainer from '../ModalContainer'
 import Button from '../Button'
-import { AppDispatch } from "../../app/store";
-import { useDispatch } from 'react-redux'
+import { AppDispatch, RootState } from "../../app/store";
+import { useDispatch, useSelector } from 'react-redux'
 import { addBoard, updateBoard } from '../../features/boards/boardSlice'
+import { setDisplayBoard } from '../../features/boards/displayBoardSlice'
 import { Board } from '../../types'
 import { Transition } from '@headlessui/react';
 
@@ -23,12 +24,14 @@ const BoardForm = ({ setShowBoardForm, showBoardForm, title, currentBoard=null }
                             })
 
   const dispatch = useDispatch<AppDispatch>()
+  // to get length so we can set display board to newly created board
+  const {boards} = useSelector((state: RootState) => state.boards)
 
   const inputTemplateStyle = "text-[13px] font-medium text-black dark:text-white border border-l-lines dark:border-m-gray rounded dark:bg-d-gray"
 
   const changeColumnInput = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     let newTasks = [...board.tasks].map(task => {
-      // test if column that had tasks was deleted
+      // test if column that had tasks was changed
       if(task.status === board.columns[index]){
         return {
           ...task,
@@ -77,11 +80,15 @@ const BoardForm = ({ setShowBoardForm, showBoardForm, title, currentBoard=null }
     if(title === "Edit Board"){
       dispatch(updateBoard(boardData))
     } else {
+      console.log("state.boards submit", boards)
       dispatch(addBoard(boardData))
+      dispatch(setDisplayBoard(boards.length))
     }
 
     setShowBoardForm(false)
   }
+
+  const addBoardStyle = !currentBoard ? "absolute w-full h-full" : ""
 
   return (
     <ModalContainer closeModal={setShowBoardForm}>
@@ -90,7 +97,7 @@ const BoardForm = ({ setShowBoardForm, showBoardForm, title, currentBoard=null }
         appear={true}
         enter="transition-all duration-300"
         enterFrom="translate-y-full"
-        enterTo="translate-y-0 z-10 opacity-100 w-120 max-h-[95vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg"
+        enterTo={`${addBoardStyle} translate-y-0 z-10 opacity-100 md:w-120 max-h-[90vh] overflow-scroll p-8 bg-white dark:bg-d-gray rounded-lg`}
         leave="transition-all duration-300"
         leaveFrom="translate-y-0"
         leaveTo="-translate-y-full"

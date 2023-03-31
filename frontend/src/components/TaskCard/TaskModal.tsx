@@ -86,7 +86,7 @@ const TaskModal = ({ index, task, columns, column, toggleTaskView }:TaskModalPro
             message={`Are you sure you want to delete the ‘${task.title}’ task and its subtasks? This action cannot be reversed.`}
           />
         : <div 
-          className="opacity-100 w-120 p-8 bg-white dark:bg-d-gray rounded-lg cursor-default"
+          className="opacity-100 max-w-[85vw] md:w-120 max-h-[90vh] overflow-auto p-8 bg-white dark:bg-d-gray rounded-lg cursor-default"
           onClick={(e) => {
               e.stopPropagation()
             }

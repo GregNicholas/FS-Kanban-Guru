@@ -5,7 +5,7 @@ import { RootState } from "../../app/store";
 import { useSelector } from 'react-redux'
 import { Transition } from '@headlessui/react';
 
-const SelectBoard = () => {
+const SelectBoard = ({closeSidebar}: {closeSidebar: () => void}) => {
   const [ showBoardForm, setShowBoardForm ] = useState(false)
   const {boards: boardsData} = useSelector((state: RootState) => state.boards)
   const {user} = useSelector((state: RootState) => state.auth)
@@ -24,6 +24,7 @@ const SelectBoard = () => {
                 return <SelectBoardTitle key={board.name} 
                           board={board} 
                           index={index}
+                          closeSidebar={closeSidebar}
                 />
             })}
             <li 

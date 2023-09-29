@@ -12,7 +12,7 @@ interface LoginData {
 }
 
 if(process.env.NODE_ENV === 'development'){
-    axios.defaults.baseURL = `http://localhost:2121`
+    axios.defaults.baseURL = `http://localhost:8080`
 }
 
 const API_URL = '/api/users/'
